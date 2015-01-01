@@ -11,7 +11,7 @@
 				//"--exclude=.gitignore/",
 				//"--exclude=.git/",
 				".",
-				"u43111589@jakesiegers.com:/jakeisa.ninja/zebra/"
+				"u43111589@jakesiegers.com:jakeisa.ninja/zebra/"
 			);
 			print_r($cmdArgs);
 			$rsyncCommand="rsync ".implode(" ",$cmdArgs);
