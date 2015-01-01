@@ -5,13 +5,14 @@
 				"-avz",
 				"-e",
 				"'ssh -i /var/lib/jenkins-php-libs/sshKeys/jakesiegers'",
-				//"--delete",
-				//"--exclude=jenkins-builder-php/",
-				//"--exclude=project-files/",
-				//"--exclude=.gitignore/",
-				//"--exclude=.git/",
+				"--delete",
+				"--exclude=jenkins-builder-php/",
+				"--exclude=project-files/",
+				"--exclude=.gitignore/",
+				"--exclude=.git/",
 				".",
-				"u43111589@jakesiegers.com:jakeisa.ninja/zebra/"
+				//I assume this won't change. If it does, the build will stop. I feel better putting a absolute URL instead of relative one.
+				"u43111589@jakesiegers.com:/kunden/homepages/13/d185963174/htdocs/jakeisa.ninja/zebra/"
 			);
 			print_r($cmdArgs);
 			$rsyncCommand="rsync ".implode(" ",$cmdArgs);
