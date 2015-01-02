@@ -1,9 +1,10 @@
 var GameStateObj = {};
-GameStateObj.Boot = function(game) {};
+GameStateObj.Boot = function(game) {
+};
 GameStateObj.Boot.prototype = {
 	preload: function() {
-		this.load.image('preloaderBg', 'img/loading-bg.png');
-		this.load.image('preloaderBar', 'img/loading-bar.png');
+		//this.load.image('preloaderBg', 'img/loading-bg.png');
+		//this.load.image('preloaderBar', 'img/loading-bar.png');
 	},
 	create: function() {
 		//this.game.input.maxPointers = 1;

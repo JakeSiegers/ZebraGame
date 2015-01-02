@@ -1,13 +1,19 @@
 GameStateObj.Preloader = function(game) {
-	style = { font: "65px Arial", fill: "#000000", align: "center" };
+	loadingPrefix = "Loading...";
+	loadingText = null;
+	loadingTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" };
 };
 GameStateObj.Preloader.prototype = {
 	preload: function() {
-		this.game.stage.backgroundColor = '#00ff00';
-		this.game.add.text(0, 0, "Loading....", style);
-		this.preloadBg = this.add.sprite((320-297)/2, (480-145)/2, 'preloaderBg');
-		this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
-		this.load.setPreloadSprite(this.preloadBar);
+		this.game.stage.backgroundColor = '#000000';
+		loadingText = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2,loadingPrefix, loadingTextStyle);
+		loadingText.anchor.set(0.5);
+		this.load.onFileComplete.add(this.updateLoadText);
+
+		//this.preloadBg = this.add.sprite((320-297)/2, (480-145)/2, 'preloaderBg');
+		//this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
+		//this.load.setPreloadSprite(this.preloadBar);
+		
 		this.load.image('ball', 'img/ball.png');
 		this.load.image('hole', 'img/hole.png');
 		this.load.image('element-w', 'img/element-w.png');
@@ -26,5 +32,8 @@ GameStateObj.Preloader.prototype = {
 	},
 	create: function() {
 		this.game.state.start('MainMenu');
+	},
+	updateLoadText: function(progress){
+		loadingText.setText(loadingPrefix+"("+progress+"%)");
 	}
 };

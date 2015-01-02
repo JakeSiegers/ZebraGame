@@ -1,6 +1,6 @@
 GameStateObj.MainMenu = function(game) {
 	menuMusic = null;
-	style = { font: "65px Arial", fill: "#000000", align: "center" };
+	menuText = { font: "65px Arial", fill: "#000000", align: "center" };
 };
 GameStateObj.MainMenu.prototype = {
 	create: function() {
