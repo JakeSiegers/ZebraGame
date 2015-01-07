@@ -42,10 +42,10 @@ GameStateObj.MainMenu.prototype = {
 					// Don't need this, but the event is here if you want it.
 					},
 					touchMove: function(joystick_details) {
-						game.input.joystickLeft = joystick_details;
+						this.game.input.joystickLeft = joystick_details;
 					},
 					touchEnd: function() {
-						game.input.joystickLeft = null;
+						this.game.input.joystickLeft = null;
 					}
 				}
 			},
