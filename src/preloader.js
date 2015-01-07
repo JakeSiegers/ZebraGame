@@ -22,18 +22,10 @@ GameStateObj.Preloader.prototype = {
 		this.load.image('grass1', 'img/grass1.png');
 		this.load.image('grass2', 'img/grass2.png');
 		this.load.image('ground', 'img/ground.png');
-		//this.load.image('element-w', 'img/element-w.png');
-		//this.load.image('element-h', 'img/element-h.png');
 
-		/*
-		this.load.image('panel', 'img/panel.png');
-		this.load.image('title', 'img/title.png');
-		this.load.image('button-pause', 'img/button-pause.png');
-		this.load.image('button-start', 'img/button-start.png');
-		this.load.image('screen-bg', 'img/screen-bg.png');
-		this.load.image('screen-mainmenu', 'img/screen-mainmenu.png');
-		this.load.image('screen-howtoplay', 'img/screen-howtoplay.png');
-		*/
+		this.load.image('compass', 'img/joystickBack.png');
+		this.load.image('touch_segment', 'img/joystickFront.png');
+		this.load.image('touch', 'img/joystickPointer.png');
 
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 

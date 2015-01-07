@@ -30,40 +30,12 @@ GameStateObj.MainMenu.prototype = {
 		menuGrass1 = this.game.add.tileSprite(0, 370, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1');
 		menuGround = this.game.add.tileSprite(0, 500, this.game.canvas.width, this.game.cache.getImage('ground').height, 'ground');
 		menuGrass2 = this.game.add.tileSprite(0, 400, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2');
-
 		//menuHills.anchor.set(0.5);
 
-		// Init game controller with left thumb stick
-		GameController.init( {
-    left: {
-        type: 'joystick',
-        position: { left: '15%', bottom: '15%' },
-        joystick: {
-          touchStart: function() {
-            console.log('touch starts');
-          },
-          touchEnd: function() {
-            console.log('touch ends');
-          },
-          touchMove: function( details ) {
-            console.log( details.dx );
-            console.log( details.dy );
-            console.log( details.max );
-            console.log( details.normalizedX );
-            console.log( details.normalizedY );
-          }
-        }
-    },
-    right: {
-        type: 'joystick',
-        position: { right: '15%', bottom: '15%' } ,
-        joystick: {
-          touchMove: function( details ) {
-             // Do something...
-           }
-       }
-    }
-});
+		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
+		this.game.touchControl.inputEnable();
+
+
 	},
 	update: function(){
 
