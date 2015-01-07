@@ -34,27 +34,36 @@ GameStateObj.MainMenu.prototype = {
 		//menuHills.anchor.set(0.5);
 
 		// Init game controller with left thumb stick
-		GameController.init({
-			left: {
-				type: 'joystick',
-				joystick: {
-					touchStart: function() {
-					// Don't need this, but the event is here if you want it.
-					},
-					touchMove: function(joystick_details) {
-						this.game.input.joystickLeft = joystick_details;
-					},
-					touchEnd: function() {
-						this.game.input.joystickLeft = null;
-					}
-				}
-			},
-			right: {
-				// We're not using anything on the right for this demo, but you can add buttons, etc.
-				// See https://github.com/austinhallock/html5-virtual-game-controller/ for examples.
-				type: 'none'
-			}
-		});
+		GameController.init( {
+    left: {
+        type: 'joystick',
+        position: { left: '15%', bottom: '15%' },
+        joystick: {
+          touchStart: function() {
+            console.log('touch starts');
+          },
+          touchEnd: function() {
+            console.log('touch ends');
+          },
+          touchMove: function( details ) {
+            console.log( details.dx );
+            console.log( details.dy );
+            console.log( details.max );
+            console.log( details.normalizedX );
+            console.log( details.normalizedY );
+          }
+        }
+    },
+    right: {
+        type: 'joystick',
+        position: { right: '15%', bottom: '15%' } ,
+        joystick: {
+          touchMove: function( details ) {
+             // Do something...
+           }
+       }
+    }
+});
 	},
 	update: function(){
 
