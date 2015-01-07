@@ -2,11 +2,18 @@ GameStateObj.MainMenu = function(game) {
 	menuMusic = null;
 	menuTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
 	menuText = null;
+
+	menuHills = null;
+	menuGrass1 = null;
+	menuGrass2 = null;
+	menuGround = null;
+
+	count = 0;
 };
 GameStateObj.MainMenu.prototype = {
 	create: function() {
-		this.game.stage.backgroundColor = '#ff0000';
-		menuText = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2, "Main Menu, Lame!", menuTextStyle);
+		this.game.stage.backgroundColor = '#9ac4be';
+		menuText = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2, "Serengeti Sprint", menuTextStyle);
 		menuText.anchor.set(0.5);
 		//this.add.sprite(0, 0, 'screen-mainmenu');
 		//this.add.sprite((320-221)/2, 40, 'title');
@@ -18,6 +25,27 @@ GameStateObj.MainMenu.prototype = {
 		//menuMusic = this.game.add.audio('bgm');
 		//console.log("Playing music");
 		//menuMusic.play();
+
+		menuHills = this.game.add.tileSprite(0, 360, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills');
+		menuGrass1 = this.game.add.tileSprite(0, 370, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1');
+		menuGround = this.game.add.tileSprite(0, 500, this.game.canvas.width, this.game.cache.getImage('ground').height, 'ground');
+		menuGrass2 = this.game.add.tileSprite(0, 400, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2');
+
+		//menuHills.anchor.set(0.5);
+	},
+	update: function(){
+
+		count+=0.005;
+		if(count>Math.PI*2){
+			count=0;
+		}
+
+		scrollSpeed = Math.sin(count)*10;
+
+		menuHills.tilePosition.x -= scrollSpeed;
+		menuGrass1.tilePosition.x -= scrollSpeed*2;
+		menuGround.tilePosition.x -= scrollSpeed*3;
+		menuGrass2.tilePosition.x -= scrollSpeed*3;
 	},
 	startGame: function() {
 		this.game.state.start('StoryHowto');

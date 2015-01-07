@@ -17,11 +17,15 @@ GameStateObj.Preloader.prototype = {
 		//this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
 		//this.load.setPreloadSprite(this.preloadBar);
 
+		this.load.image('hills', 'img/hills.png');
+		this.load.image('tree', 'img/tree.png');
+		this.load.image('grass1', 'img/grass1.png');
+		this.load.image('grass2', 'img/grass2.png');
+		this.load.image('ground', 'img/ground.png');
+		//this.load.image('element-w', 'img/element-w.png');
+		//this.load.image('element-h', 'img/element-h.png');
+
 		/*
-		this.load.image('ball', 'img/ball.png');
-		this.load.image('hole', 'img/hole.png');
-		this.load.image('element-w', 'img/element-w.png');
-		this.load.image('element-h', 'img/element-h.png');
 		this.load.image('panel', 'img/panel.png');
 		this.load.image('title', 'img/title.png');
 		this.load.image('button-pause', 'img/button-pause.png');
