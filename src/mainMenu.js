@@ -36,7 +36,8 @@ GameStateObj.MainMenu.prototype = {
 		this.game.touchControl.inputEnable();
 		this.game.touchControl.settings.maxDistanceInPixels = 100;
 
-
+		buildText = this.game.add.text(0,0,buildInfo,{ font: "20px monospace",stroke:"#FFFFFF", strokeThickness:2, fill: "#000000", align: "left" });
+    	buildText = 0.5;
 	},
 	update: function(){
 
@@ -57,5 +58,6 @@ GameStateObj.MainMenu.prototype = {
 	},
 	render: function() {
     	//this.game.debug.soundInfo(menuMusic, 20, 32);
+    	
 	}
 };

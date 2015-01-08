@@ -1,6 +1,9 @@
 <?php
 	class build{
 		function deploy(){
+
+			$this->updateBuildInfo();
+
 			$cmdArgs = array(
 				"-avz",
 				"-e",
@@ -22,6 +25,14 @@
 			exec($rsyncCommand,$output,$returnVar);
 			echo implode("\n",$output);
 			return $this->exitCode($returnVar);
+		}
+
+		private function updateBuildInfo(){
+			var_dump($_SERVER);
+			die();
+			//$buildString = Built with <i class=\"icon-heart\"></i> by ".$_SERVER['BUILD_USER_ID']."<br />SVN Rev ".$_SERVER['SVN_REVISION']." / Jenkins ".$_SERVER['BUILD_NUMBER']."<br />".date('F jS Y h:i:s A');
+
+			file_put_contents("src/buildInfo.js", 'buildInfo = "'.$buildString.";');
 		}
 
 		private function exitCode($returnVar){
