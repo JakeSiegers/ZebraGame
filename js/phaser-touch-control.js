@@ -63,7 +63,7 @@
 		// max distance from itial touch
 		maxDistanceInPixels: 200,
 		singleDirection: false,
-		compassAlreadyShowing: false
+		//compassAlreadyShowing: false
 	};
 	
 
@@ -87,10 +87,10 @@
 
 	var initialPoint;
 	var createCompass = function(){
-		if(this.settings.compassAlreadyShowing){ //We don't want two joysticks at once...
-			return false;
-		}
-		this.settings.compassAlreadyShowing = true;
+		//if(this.settings.compassAlreadyShowing == true){ //We don't want two joysticks at once...
+		//	return false;
+		//}
+		//this.settings.compassAlreadyShowing = true;
 
 		this.imageGroup.forEach(function (e) {
 			e.visible=true;
@@ -107,7 +107,7 @@
 		
 	};
 	var removeCompass = function () {
-		this.settings.compassAlreadyShowing = false;
+		//this.settings.compassAlreadyShowing = false;
 
 		this.imageGroup.forEach(function(e){
 			e.visible = false;
