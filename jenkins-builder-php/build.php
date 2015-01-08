@@ -28,9 +28,8 @@
 		}
 
 		private function updateBuildInfo(){
-			var_dump($_SERVER);
-			die();
-			//$buildString = Built with <i class=\"icon-heart\"></i> by ".$_SERVER['BUILD_USER_ID']."<br />SVN Rev ".$_SERVER['SVN_REVISION']." / Jenkins ".$_SERVER['BUILD_NUMBER']."<br />".date('F jS Y h:i:s A');
+
+			$buildString = "Built with <3 by ".$_SERVER['BUILD_USER_ID']."\nGit: ".$_SERVER['GIT_COMMIT']."\nJenkins: ".$_SERVER['BUILD_NUMBER']."\n".date('F jS Y h:i:s A');
 
 			file_put_contents("src/buildInfo.js", 'buildInfo = "'.$buildString.'";');
 		}
