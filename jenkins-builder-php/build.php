@@ -29,7 +29,7 @@
 
 		private function updateBuildInfo(){
 
-			$buildString = "Git: ".$_SERVER['GIT_COMMIT']."\\nJenkins: ".$_SERVER['BUILD_NUMBER']."\\n".date('F jS Y h:i:s A');
+			$buildString = "Built by: ".$_SERVER['BUILD_USER_ID']."\\nGit: ".$_SERVER['GIT_COMMIT']."\\nJenkins: ".$_SERVER['BUILD_NUMBER']."\\n".date('F jS Y h:i:s A');
 
 			file_put_contents("src/buildInfo.js", 'buildInfo = "'.$buildString.'";');
 		}
