@@ -32,7 +32,7 @@
 			die();
 			//$buildString = Built with <i class=\"icon-heart\"></i> by ".$_SERVER['BUILD_USER_ID']."<br />SVN Rev ".$_SERVER['SVN_REVISION']." / Jenkins ".$_SERVER['BUILD_NUMBER']."<br />".date('F jS Y h:i:s A');
 
-			file_put_contents("src/buildInfo.js", 'buildInfo = "'.$buildString.";');
+			file_put_contents("src/buildInfo.js", 'buildInfo = "'.$buildString.'";');
 		}
 
 		private function exitCode($returnVar){
