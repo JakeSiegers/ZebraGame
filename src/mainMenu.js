@@ -34,6 +34,7 @@ GameStateObj.MainMenu.prototype = {
 
 		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
 		this.game.touchControl.inputEnable();
+		this.game.touchControl.settings.maxDistanceInPixels = 100;
 
 
 	},

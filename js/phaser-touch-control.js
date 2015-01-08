@@ -27,6 +27,8 @@
 
 	Contact: https://github.com/eugenioclrc, @eugenioclrc
 
+	//Modded Slightly for only one touch at a time.
+
   */
 
 (function(window, Phaser) {
@@ -60,7 +62,8 @@
 	Phaser.Plugin.TouchControl.prototype.settings = {
 		// max distance from itial touch
 		maxDistanceInPixels: 200,
-		singleDirection: false
+		singleDirection: false,
+		compassAlreadyShowing: false
 	};
 	
 
@@ -84,6 +87,11 @@
 
 	var initialPoint;
 	var createCompass = function(){
+		if(this.settings.compassAlreadyShowing){ //We don't want two joysticks at once...
+			return false;
+		}
+		this.settings.compassAlreadyShowing = true;
+
 		this.imageGroup.forEach(function (e) {
 			e.visible=true;
 			e.bringToTop();
@@ -99,6 +107,8 @@
 		
 	};
 	var removeCompass = function () {
+		this.settings.compassAlreadyShowing = false;
+
 		this.imageGroup.forEach(function(e){
 			e.visible = false;
 		});
