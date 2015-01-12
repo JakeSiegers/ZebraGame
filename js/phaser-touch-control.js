@@ -27,7 +27,7 @@
 
 	Contact: https://github.com/eugenioclrc, @eugenioclrc
 
-	//Modded Slightly for only one touch at a time.
+	//Jake Modded Slightly for only one touch at a time. Or not, I commented it out for now
 
   */
 

@@ -1,14 +1,18 @@
-GameStateObj.Preloader = function(game) {
-	loadingPrefix = "Loading...";
-	loadingText = null;
-	loadingTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" };
-};
+GameStateObj.Preloader = function(game) {};
 GameStateObj.Preloader.prototype = {
+	init:function(){
+		this.pl_loadingPrefix = "Loading...";
+		this.pl_loadingText = null;
+		this.pl_loadingTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" };
+
+		this.pl_loadingText = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2,this.pl_loadingPrefix, this.pl_loadingTextStyle);
+		this.pl_loadingText.anchor.set(0.5);
+	},
 	preload: function() {
+
 		this.game.stage.backgroundColor = '#000000';
-		loadingText = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2,loadingPrefix, loadingTextStyle);
-		loadingText.anchor.set(0.5);
-		this.load.onFileComplete.add(this.updateLoadText);
+
+		this.load.onFileComplete.add(this.updateLoadText,this);
 
 		//ADD ART TO LOAD HERE
 		//Your loader will take care of thuis automagically.
@@ -27,14 +31,25 @@ GameStateObj.Preloader.prototype = {
 		this.load.image('touch_segment', 'img/joystickFront.png');
 		this.load.image('touch', 'img/joystickPointer.png');
 
+		this.load.spritesheet('button', 'img/button_sprite_sheet.png', 193, 71);
+
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 
 		//this.load.audio('bgm', ['music/Paradisco.ogg']);
 	},
 	create: function() {
-		this.game.state.start('MainMenu');
+		//this.game.state.start('MainMenu');
+		//this.pl_startBtn = this.game.add.button(this.game.canvas.width/2, this.game.canvas.height/4, 'button', function() {
+			
+		//}, this, 2, 1, 0);
+		//this.pl_startBtn.anchor.set(0.5);
+
+		setTimeout(function(){
+			transitions.to('MainMenu');
+		},100);
+		
 	},
-	updateLoadText: function(progress){
-		loadingText.setText(loadingPrefix+"("+progress+"%)");
+	updateLoadText: function(progress){ //for whatever reason objects aren't created yet?
+		this.pl_loadingText.setText(this.pl_loadingPrefix+"("+progress+"%)");
 	}
 };

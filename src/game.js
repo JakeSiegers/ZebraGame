@@ -1,4 +1,5 @@
 GameStateObj.Game = function(game) {
+	/*
 	keys = null;
 	ball = null;
 	walls = null;
@@ -10,9 +11,12 @@ GameStateObj.Game = function(game) {
 	sfx_bounce = null;
 	maxLevels = 5;
 	audio = true;
+	*/
 };
 GameStateObj.Game.prototype = {
 	create: function() {
+
+		this.game.stage.backgroundColor = '#ff0000';
 		/*this.add.sprite(0, 0, 'screen-bg');
 		panel = this.add.sprite(0, 0, 'panel');
 		panel.body.immovable = true;
