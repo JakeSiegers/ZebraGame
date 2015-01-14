@@ -37,7 +37,7 @@ GameStateObj.MainMenu.prototype = {
 
 		this.mm_Hills = this.game.add.tileSprite(0,0, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills');
 		this.mm_Grass1 = this.game.add.tileSprite(0,10, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1');
-		this.mm_Ground = this.game.add.tileSprite(0,140, this.game.canvas.width, this.game.cache.getImage('ground').height*10, 'ground');
+		this.mm_Ground = this.game.add.tileSprite(0,140, this.game.canvas.width, this.game.cache.getImage('ground').height*5, 'ground');
 		this.mm_Grass2 = this.game.add.tileSprite(0,40, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2');
 
 		this.mm_ground.add(this.mm_Hills);
