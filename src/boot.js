@@ -22,10 +22,10 @@ GameStateObj.Boot.prototype = {
 			properties: {
 				alpha: 0,
 				scale: {
-					x: 0,
-					y: 0
+					x: 1.2,
+					y: 1.2
 				},
-				angle: 180
+				//angle: 180
 			}
 		})
 
