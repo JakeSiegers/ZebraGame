@@ -24,10 +24,7 @@ GameStateObj.Boot.prototype = {
 					x: 0,
 					y: 0
 				},
-				x:100,
-				position:{
-					x:100
-				}
+				angle: 180
 			}
 		})
 

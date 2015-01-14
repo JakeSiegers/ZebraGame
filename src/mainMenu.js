@@ -18,8 +18,6 @@ GameStateObj.MainMenu.prototype = {
 	},
 	create: function() {
 
-		console.log(this);
-
 		this.game.stage.backgroundColor = '#9ac4be';
 		this.mm_Text = this.game.add.text(this.game.canvas.width/2, this.game.canvas.height/2, "Serengeti Sprint", this.mm_TextStyle);
 		this.mm_Text.anchor.set(0.5);
@@ -34,21 +32,24 @@ GameStateObj.MainMenu.prototype = {
 		//console.log("Playing music");
 		//menuMusic.play();
 
-		this.mm_Hills = this.game.add.tileSprite(0, 360, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills');
-		this.mm_Grass1 = this.game.add.tileSprite(0, 370, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1');
-		this.mm_Ground = this.game.add.tileSprite(0, 500, this.game.canvas.width, this.game.cache.getImage('ground').height, 'ground');
-		this.mm_Grass2 = this.game.add.tileSprite(0, 400, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2');
+		this.ground = this.game.add.group();
+
+		this.mm_Hills = this.game.add.tileSprite(0,1440, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills');
+		this.mm_Grass1 = this.game.add.tileSprite(0, 1450, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1');
+		this.mm_Ground = this.game.add.tileSprite(0, 1580, this.game.canvas.width, this.game.cache.getImage('ground').height, 'ground');
+		this.mm_Grass2 = this.game.add.tileSprite(0, 1480, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2');
 		//menuHills.anchor.set(0.5);
 
-		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
-		this.game.touchControl.inputEnable();
-		this.game.touchControl.settings.maxDistanceInPixels = 100;
-
-		this.game.add.text(0,0,buildInfo,{ font: "20px monospace", fill: "#000000", align: "left" });
+		this.ground.add(this.mm_Hills);
+		this.ground.add(this.mm_Grass1);
+		this.ground.add(this.mm_Ground);
+		this.ground.add(this.mm_Grass2);
 
 		this.game.add.button(96, 96, 'button', function() {
 			transitions.to('Game');
 		}, this, 2, 1, 0);
+
+		this.game.add.tween(this.ground).to({ y: -1000 }, 1000, Phaser.Easing.Elastic.Out, true, 500, 0);
 	},
 	update: function(){
 
@@ -61,16 +62,18 @@ GameStateObj.MainMenu.prototype = {
 
 		this.mm_ScrollSpeed = Math.sin(this.mm_Count)*10;
 
-		this.mm_Hills.tilePosition.x -= this.mm_ScrollSpeed;
-		this.mm_Grass1.tilePosition.x -= this.mm_ScrollSpeed*2;
-		this.mm_Ground.tilePosition.x -= this.mm_ScrollSpeed*3;
-		this.mm_Grass2.tilePosition.x -= this.mm_ScrollSpeed*3;
-	},
-	startGame: function() {
-		this.game.state.start('StoryHowto');
+		this.ground.forEach(function(i){
+			var num = this.ground.getIndex(i)+1;
+			var multi = num<3?num:3; //merge 3rd and 4th layers
+			i.tilePosition.x -= this.mm_ScrollSpeed*multi;
+		},this);
+
+		
+
+
 	},
 	render: function() {
-    	//this.game.debug.soundInfo(menuMusic, 20, 32);
+    	this.game.debug.text(buildInfo, 32, 32);
     	
 	}
 };

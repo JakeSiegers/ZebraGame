@@ -14,9 +14,18 @@ GameStateObj.Game = function(game) {
 	*/
 };
 GameStateObj.Game.prototype = {
+	init: function(){
+
+	},
 	create: function() {
 
-		this.game.stage.backgroundColor = '#ff0000';
+		this.game.stage.backgroundColor = '#9ac4be';
+
+		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
+		this.game.touchControl.inputEnable();
+		this.game.touchControl.settings.maxDistanceInPixels = 100;
+
+
 		/*this.add.sprite(0, 0, 'screen-bg');
 		panel = this.add.sprite(0, 0, 'panel');
 		panel.body.immovable = true;
