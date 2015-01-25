@@ -146,8 +146,8 @@ GameStateObj.Game.prototype = {
 		}
 		*/
 
-		this.g_giraffeHead.x = this.g_headX - this.game.touchControl.speed.x;
-		this.g_giraffeHead.y = this.g_headY - this.game.touchControl.speed.y;
+		this.g_giraffeHead.x = this.g_headX - this.game.touchControl.speed.x*2;
+		this.g_giraffeHead.y = this.g_headY - this.game.touchControl.speed.y*2;
 
 
 		this.points[1].y = this.g_giraffeHead.y;
