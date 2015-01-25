@@ -20,8 +20,8 @@ GameStateObj.Game.prototype = {
 
 		this.g_head;
 
-		this.g_headX = 100;
-		this.g_headY = 100;
+		this.g_headX = 200;
+		this.g_headY = 200;
 
 		this.g_headOffsetX = 0;
 		this.g_headOffsetY = 0;
