@@ -49,9 +49,11 @@ GameStateObj.MainMenu.prototype = {
 
 		this.mm_startBtn = this.game.add.button(this.game.canvas.width*0.25, -1000, 'button', function() {
 			//this.mm_ground.y = 100;
-			console.log(this.mm_ground);
-			transitions.to('Game',false,{"ground":this.mm_ground});
-			
+
+			this.hidePosition();
+			setTimeout(function(){
+				transitions.to('Game');
+			},1000);
 		}, this, 2, 1, 0);
 		var btnText = new Phaser.Text(this.game, 0, 0, "START", this.mm_ButtonTextStyle)
 		btnText.anchor.set(0.5);
@@ -108,6 +110,13 @@ GameStateObj.MainMenu.prototype = {
 	},
 	render: function() {
     	this.game.debug.text(buildInfo, 32, 32);
+	},
+	hidePosition:function(){
+		this.game.add.tween(this.mm_ground).to({ y: this.game.canvas.height}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_Title).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_startBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_helpBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_creditsBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 	},
 	startPosition:function(){
 		this.game.add.tween(this.mm_ground)

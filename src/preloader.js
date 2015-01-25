@@ -37,6 +37,8 @@ GameStateObj.Preloader.prototype = {
 		this.load.spritesheet('button', 'img/buttons.png', 285, 74);
 
 		this.load.image('giraffeHead', 'img/giraffeHead.png');
+		this.load.image('giraffeNeck', 'img/giraffeNeck.png');
+		this.load.image('giraffeBody', 'img/giraffeBody.png');
 
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 

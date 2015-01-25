@@ -20,8 +20,8 @@ GameStateObj.Game.prototype = {
 
 		this.g_head;
 
-		this.g_headX = 200;
-		this.g_headY = 200;
+		this.g_headX = 300;
+		this.g_headY = 300;
 
 		this.g_headOffsetX = 0;
 		this.g_headOffsetY = 0;
@@ -40,7 +40,23 @@ GameStateObj.Game.prototype = {
 		this.game.touchControl.speed.x;
 		this.game.touchControl.speed.y;
 
+		this.g_giraffeGroup = this.game.add.group();
+
 		this.g_giraffeHead = this.add.sprite(this.g_headX, this.g_headY, 'giraffeHead');
+		this.g_giraffeHead.anchor.set(0.3,1);
+
+		this.points = [];
+		this.points.push(new Phaser.Point(this.g_headX, this.g_headY+150));
+		this.points.push(new Phaser.Point(this.g_headX, this.g_headY));
+
+		this.g_giraffeNeck = this.game.add.rope(0,0,'giraffeNeck', null, this.points);
+
+		this.g_giraffeBody = this.add.sprite(this.g_headX, this.g_headY+150, 'giraffeBody');
+		this.g_giraffeBody.anchor.set(0.715,0);
+
+
+		this.g_giraffeGroup.add(this.g_giraffeHead);
+		this.g_giraffeGroup.add(this.g_giraffeNeck);
 
 		this.g_ground = this.game.add.group();
 
@@ -103,6 +119,8 @@ GameStateObj.Game.prototype = {
 			i.tilePosition.x -= this.g_gameSpeed*multi;
 		},this);
 
+
+
 		/*
 		this.game.touchControl.speed.x /= 4;
 		if(this.g_headOffsetX - this.game.touchControl.speed.x >-100 && this.g_headOffsetX - this.game.touchControl.speed.x <100){
@@ -113,7 +131,7 @@ GameStateObj.Game.prototype = {
 			this.g_headOffsetY -= this.game.touchControl.speed.y;
 		}
 
-		
+
 		if(this.g_headOffsetX > 0){
 			this.g_headOffsetX -= 2;
 		}
@@ -127,13 +145,13 @@ GameStateObj.Game.prototype = {
 			this.g_headOffsetY += 2;
 		}
 		*/
-		
 
 		this.g_giraffeHead.x = this.g_headX - this.game.touchControl.speed.x;
 		this.g_giraffeHead.y = this.g_headY - this.game.touchControl.speed.y;
 
 
-
+		this.points[1].y = this.g_giraffeHead.y;
+		this.points[1].x = this.g_giraffeHead.x;
 	},
 	render:function(){
 		this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
@@ -142,7 +160,7 @@ GameStateObj.Game.prototype = {
 		console.log(this.g_ground);
 		this.game.add.tween(this.g_ground)
 		.to({ y: this.game.canvas.height }, 500, Phaser.Easing.Exponential.InOut)
-		.to({ y: this.game.canvas.height-350 }, 1000, Phaser.Easing.Exponential.InOut)
+		.to({ y: this.game.canvas.height-250 }, 1000, Phaser.Easing.Exponential.InOut)
 		.start();
 	},
 	/*
