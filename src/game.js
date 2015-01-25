@@ -75,7 +75,7 @@ GameStateObj.Game.prototype = {
 		this.points[1].x = this.g_giraffeHead.x;
 	},
 	render:function(){
-		this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
+		//this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
 	},
 	startPosition:function(){
 		console.log(this.g_ground);
