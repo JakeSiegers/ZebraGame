@@ -46,8 +46,8 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeHead.anchor.set(0.3,1);
 
 		this.points = [];
-		this.points.push(new Phaser.Point(this.g_headX, this.g_headY+150));
-		this.points.push(new Phaser.Point(this.g_headX, this.g_headY));
+		this.points.push(new Phaser.Point(this.g_headX, this.g_headY+160));
+		this.points.push(new Phaser.Point(0, 0));
 
 		this.g_giraffeNeck = this.game.add.rope(0,0,'giraffeNeck', null, this.points);
 
@@ -150,7 +150,7 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeHead.y = this.g_headY - this.game.touchControl.speed.y*2;
 
 
-		this.points[1].y = this.g_giraffeHead.y;
+		this.points[1].y = this.g_giraffeHead.y-10;
 		this.points[1].x = this.g_giraffeHead.x;
 	},
 	render:function(){
