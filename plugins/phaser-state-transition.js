@@ -43,9 +43,10 @@
 
 	/**
 	  * Calls the _draw method which handles the state changes and transitions
+	  * initParameter will be passed to the init() function in the new scene (if it exists!)
 	  */
-	Phaser.Plugin.StateTransition.prototype.to = function (state, callback) {
-		_draw.call(this, state);
+	Phaser.Plugin.StateTransition.prototype.to = function (state, callback, initParameter) {
+		_draw.call(this, state, initParameter);
 	};
 
 	/** 
@@ -85,7 +86,7 @@
 	}
 
 	/* Draw the world state */
-	function _draw(state) {
+	function _draw(state, initParameter) {
 
 		/* Pause the game at first */
 		this.game.paused = true;
@@ -133,7 +134,8 @@
 				_animateCover.call(_this);
 			}
 
-			this.game.state.start(state);
+			//TODO: The true and false clear the stage and prevent cache clear  - make these paramaters if needed.
+			this.game.state.start(state, true, false, initParameter);
 		}
 
 		/* Resume the game */

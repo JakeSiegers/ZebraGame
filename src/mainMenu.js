@@ -48,7 +48,10 @@ GameStateObj.MainMenu.prototype = {
 		this.mm_ground.y=1000;
 
 		this.mm_startBtn = this.game.add.button(this.game.canvas.width*0.25, -1000, 'button', function() {
-			transitions.to('Game');
+			//this.mm_ground.y = 100;
+			console.log(this.mm_ground);
+			transitions.to('Game',false,{"ground":this.mm_ground});
+			
 		}, this, 2, 1, 0);
 		var btnText = new Phaser.Text(this.game, 0, 0, "START", this.mm_ButtonTextStyle)
 		btnText.anchor.set(0.5);
@@ -85,7 +88,6 @@ GameStateObj.MainMenu.prototype = {
 		this.mm_Title = this.game.add.text(this.game.canvas.width/2,-1000, "Serengeti Sprint", this.mm_TitleStyle);
 		this.mm_Title.anchor.set(0.5);
 
-
 		this.startPosition();
 	},
 	update: function(){
@@ -94,8 +96,6 @@ GameStateObj.MainMenu.prototype = {
 		if(this.mm_Count>Math.PI*2){
 			this.mm_Count=0;
 		}
-
-		//transitions.to('Preloader');
 
 		this.mm_ScrollSpeed = Math.sin(this.mm_Count)*10;
 
@@ -108,7 +108,6 @@ GameStateObj.MainMenu.prototype = {
 	},
 	render: function() {
     	this.game.debug.text(buildInfo, 32, 32);
-    	
 	},
 	startPosition:function(){
 		this.game.add.tween(this.mm_ground)

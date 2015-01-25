@@ -14,7 +14,19 @@ GameStateObj.Game = function(game) {
 	*/
 };
 GameStateObj.Game.prototype = {
-	init: function(){
+	init: function(indata){
+
+		this.g_ground;
+
+		this.g_head;
+
+		this.g_headX = 100;
+		this.g_headY = 100;
+
+		this.g_headOffsetX = 0;
+		this.g_headOffsetY = 0;
+
+		this.g_gameSpeed = 1; //max 10?
 
 	},
 	create: function() {
@@ -25,6 +37,21 @@ GameStateObj.Game.prototype = {
 		this.game.touchControl.inputEnable();
 		this.game.touchControl.settings.maxDistanceInPixels = 100;
 
+		this.game.touchControl.speed.x;
+		this.game.touchControl.speed.y;
+
+		this.g_giraffeHead = this.add.sprite(this.g_headX, this.g_headY, 'giraffeHead');
+
+		this.g_ground = this.game.add.group();
+
+		this.g_ground.add(this.game.add.tileSprite(0,0, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills'));
+		this.g_ground.add(this.game.add.tileSprite(0,10, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1'));
+		this.g_ground.add(this.game.add.tileSprite(0,140, this.game.canvas.width, this.game.cache.getImage('ground').height*5, 'ground'));
+		this.g_ground.add(this.game.add.tileSprite(0,40, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2'));
+
+		this.g_ground.y=1000;
+
+		this.startPosition();
 
 		/*this.add.sprite(0, 0, 'screen-bg');
 		panel = this.add.sprite(0, 0, 'panel');
@@ -64,6 +91,59 @@ GameStateObj.Game.prototype = {
 		this.createLevel(level);
 
 		sfx_bounce = this.game.add.audio('bounce');*/
+	},
+	update:function(){
+		if(this.g_gameSpeed<50){
+			this.g_gameSpeed += 0.1;
+		}
+
+		this.g_ground.forEach(function(i){
+			var num = this.g_ground.getIndex(i)+1;
+			var multi = num<3?num:3; //merge 3rd and 4th layers
+			i.tilePosition.x -= this.g_gameSpeed*multi;
+		},this);
+
+		/*
+		this.game.touchControl.speed.x /= 4;
+		if(this.g_headOffsetX - this.game.touchControl.speed.x >-100 && this.g_headOffsetX - this.game.touchControl.speed.x <100){
+			this.g_headOffsetX -= this.game.touchControl.speed.x;
+		}
+		this.game.touchControl.speed.y /= 4;
+		if(this.g_headOffsetY - this.game.touchControl.speed.y >-100 && this.g_headOffsetY - this.game.touchControl.speed.y <100){
+			this.g_headOffsetY -= this.game.touchControl.speed.y;
+		}
+
+		
+		if(this.g_headOffsetX > 0){
+			this.g_headOffsetX -= 2;
+		}
+		if(this.g_headOffsetX < 0){
+			this.g_headOffsetX += 2;
+		}
+		if(this.g_headOffsetY > 0){
+			this.g_headOffsetY -= 2;
+		}
+		if(this.g_headOffsetY < 0){
+			this.g_headOffsetY += 2;
+		}
+		*/
+		
+
+		this.g_giraffeHead.x = this.g_headX + this.game.touchControl.speed.x;
+		this.g_giraffeHead.y = this.g_headY + this.game.touchControl.speed.y;
+
+
+
+	},
+	render:function(){
+		this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
+	},
+	startPosition:function(){
+		console.log(this.g_ground);
+		this.game.add.tween(this.g_ground)
+		.to({ y: this.game.canvas.height }, 500, Phaser.Easing.Exponential.InOut)
+		.to({ y: this.game.canvas.height-350 }, 1000, Phaser.Easing.Exponential.InOut)
+		.start();
 	},
 	/*
 	createLevel: function(lvl) {
