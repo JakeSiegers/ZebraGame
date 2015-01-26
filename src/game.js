@@ -14,10 +14,15 @@ GameStateObj.Game.prototype = {
 
 		this.g_gameSpeed = 1; //max 10?
 
+		this.count = 0;
+
 	},
 	create: function() {
 
 		this.game.stage.backgroundColor = '#9ac4be';
+
+		this.g_sun = this.add.sprite(this.game.canvas.width/2, this.game.canvas.height/2, 'sun');
+		this.g_sun .anchor.set(0.5,0.5);
 
 		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
 		this.game.touchControl.inputEnable();
@@ -57,6 +62,13 @@ GameStateObj.Game.prototype = {
 
 	},
 	update:function(){
+		this.count += 0.1;
+		if(this.count>Math.PI*2){
+			this.count = 0;
+		}
+		temp = this.g_headY+150 + Math.sin(this.count)*80; // = this.add.sprite(this.g_headX, this.g_headY+150, 'giraffeBody');
+
+
 		if(this.g_gameSpeed<50){
 			this.g_gameSpeed += 0.1;
 		}
@@ -73,6 +85,9 @@ GameStateObj.Game.prototype = {
 
 		this.points[1].y = this.g_giraffeHead.y-10;
 		this.points[1].x = this.g_giraffeHead.x;
+
+		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.count)*500;
+		this.g_sun.y = this.game.canvas.height/2 + Math.tan(this.count)*500*Math.sin(this.count);
 	},
 	render:function(){
 		//this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
