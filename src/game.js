@@ -80,7 +80,7 @@ GameStateObj.Game.prototype = {
 		//===========================================================================
 
 		this.g_scoreBoardGroup = this.game.add.group();
-		this.g_scoreBoardGroup.add();
+		//this.g_scoreBoardGroup.add();
 
 		this.startPosition();
 
