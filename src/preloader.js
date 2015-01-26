@@ -42,6 +42,8 @@ GameStateObj.Preloader.prototype = {
 
 		this.load.image('sun', 'img/sun.png');
 
+		this.load.image('scoreBoard', 'img/scoreBoard.png');
+
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 
 		//this.load.audio('bgm', ['music/Paradisco.ogg']);

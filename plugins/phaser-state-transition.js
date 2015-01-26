@@ -111,7 +111,7 @@
 		tempGraphic.clear(); //cleanup
 
 		/* Draw the current world to the render */
-		this._texture.renderXY(this.game.stage, -this.game.camera.x, -this.game.camera.y);
+		this._texture.renderXY(this.game.world, -this.game.camera.x, -this.game.camera.y);
 
 		/* If there's a state as a paramterer change the state and do the dew */
 		if (state) {
