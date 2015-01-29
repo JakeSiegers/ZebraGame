@@ -10,6 +10,7 @@ GameStateObj.Game.prototype = {
 		this.g_headY = -160; //Relative to ground!
 
 		this.g_gameSpeed = 0; //max 1
+		this.g_gameSpeedMulti = 10;
 
 		this.g_count = 0;
 
@@ -19,7 +20,7 @@ GameStateObj.Game.prototype = {
 		this.g_scoreText;
 
 		this.g_TutTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
-		this.g_ScoreTextStyle = { font: "20px Arial", fill: "#FFFFFF", align: "center" };
+		this.g_ScoreTextStyle = { font: "20px Arial", fill: "#FFFFFF", align: "left" };
 
 	},
 	create: function() {
@@ -133,7 +134,7 @@ GameStateObj.Game.prototype = {
 		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*500;
 		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*500;
 
-		this.g_scoreText.setText("Speed = "+(Math.round(this.g_gameSpeed * 100) / 100)+"\nScore = ");
+		this.g_scoreText.setText("Speed = "+(Math.round(this.g_gameSpeed * 100) / 100)+"(x"+this.g_gameSpeedMulti+")\nScore = "+this.g_score);
 	},
 	render:function(){
 		var zx = this.g_giraffeHead.world.x;
@@ -145,11 +146,13 @@ GameStateObj.Game.prototype = {
 		//this.game.debug.geom(new Phaser.Rectangle(zx-zw/2,zy-zh/2,zw,zh), 'rgba(255,0,0,0.3)' ) ;
 	},
 	increaseGameSpeed:function(){
+		this.g_totalTraveled += this.g_gameSpeed;
+		this.g_score = Math.round(this.g_totalTraveled);
 		if(this.g_started == false){
 			return;
 		}
 		if(this.g_gameSpeed<5){
-			this.g_gameSpeed += 0.0001;
+			this.g_gameSpeed += 0.0001*this.g_gameSpeedMulti;
 		}
 	},
 	startPosition:function(){
