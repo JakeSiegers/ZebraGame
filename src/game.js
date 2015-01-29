@@ -15,6 +15,7 @@ GameStateObj.Game.prototype = {
 
 		this.g_started = false;
 		this.g_score = 0;
+		this.g_totalTraveled = 0;
 		this.g_scoreText;
 
 		this.g_TutTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
@@ -132,7 +133,7 @@ GameStateObj.Game.prototype = {
 		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*500;
 		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*500;
 
-		this.g_scoreText.setText("Speed = "+Math.round(this.g_gameSpeed * 100) / 100);
+		this.g_scoreText.setText("Speed = "+(Math.round(this.g_gameSpeed * 100) / 100)+"\nScore = ");
 	},
 	render:function(){
 		var zx = this.g_giraffeHead.world.x;
