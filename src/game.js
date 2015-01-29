@@ -13,12 +13,17 @@ GameStateObj.Game.prototype = {
 
 		this.g_count = 0;
 
+		this.g_started = false;
 		this.g_score = 0;
+		this.g_scoreText;
+
+		this.g_TutTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
+		this.g_ScoreTextStyle = { font: "20px Arial", fill: "#FFFFFF", align: "center" };
 
 	},
 	create: function() {
 
-		this.game.stage.backgroundColor = '#9ac4be';
+		this.game.stage.backgroundColor = "#9ac4be";
 
 		//===========================================================================
 		//Extra Background / Sun
@@ -74,28 +79,41 @@ GameStateObj.Game.prototype = {
 		this.g_groundGroup.add(this.game.add.tileSprite(0,40, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2'));
 
 		this.g_groundGroup.y=1000;
+		
 
 		//===========================================================================
 		//ScoreBoard
 		//===========================================================================
 
 		this.g_scoreBoardGroup = this.game.add.group();
+		this.g_scoreText = this.game.add.text(25,10,"scoreBoard",this.g_ScoreTextStyle);
 		//this.g_scoreBoardGroup.add();
+		this.g_scoreBoardGroup.add(this.game.add.sprite(0,0,"scoreBoard"));
+		this.g_scoreBoardGroup.add(this.g_scoreText);
+		this.g_scoreBoardGroup.x = 30;
+		this.g_scoreBoardGroup.y = -1000;
+		//===========================================================================
+		//Mini Tutorial
+		//===========================================================================
 
-		this.startPosition();
+		this.g_TutText = this.game.add.text(this.game.canvas.width/2,-1000,"[Default Text]", this.g_TutTextStyle);
+		this.g_TutText.anchor.set(0.5);
+		this.showTutorialText(["Welcome to the Serengeti!","Use the touch screen to control your head","Avoid hitting your head into anything!","Lets Begin!"],function(){
+			this.startPosition();
+			this.g_started = true;
+		},this);
+
+		
 
 	},
 	update:function(){
-		this.g_count += 0.01;
+
+		this.g_count += this.g_gameSpeed/1000;
 		if(this.g_count>Math.PI*2){
 			this.g_count = 0;
 		}
-		temp = this.g_headY+150 + Math.sin(this.g_count)*80; // = this.add.sprite(this.g_headX, this.g_headY+150, 'giraffeBody');
 
-
-		if(this.g_gameSpeed<1){
-			this.g_gameSpeed += 0.01;
-		}
+		this.increaseGameSpeed();
 
 		this.g_groundGroup.forEach(function(i){
 			var num = this.g_groundGroup.getIndex(i)+1;
@@ -113,22 +131,49 @@ GameStateObj.Game.prototype = {
 
 		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*500;
 		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*500;
+
+		this.g_scoreText.setText("Speed = "+Math.round(this.g_gameSpeed * 100) / 100);
 	},
 	render:function(){
-		//this.game.debug.text(this.game.touchControl.speed.x, 32, 32);
-		/*this.g_groundGroup.forEach(function(i){
-			this.game.debug.spriteBounds(i);
-		},this);
-		*/
-	},
+		var zx = this.g_giraffeHead.world.x;
+		var zy = this.g_giraffeHead.world.y;
+		var zw = this.g_giraffeHead.width;
+		var zh = this.g_giraffeHead.height;
 
+		//this.game.debug.text("X: "+zx+" Y:"+zy, 32, 32);
+		//this.game.debug.geom(new Phaser.Rectangle(zx-zw/2,zy-zh/2,zw,zh), 'rgba(255,0,0,0.3)' ) ;
+	},
+	increaseGameSpeed:function(){
+		if(this.g_started == false){
+			return;
+		}
+		if(this.g_gameSpeed<5){
+			this.g_gameSpeed += 0.0001;
+		}
+	},
 	startPosition:function(){
 		this.game.add.tween(this.g_groundGroup)
-		.to({ y: this.game.canvas.height-250 }, 1000, Phaser.Easing.Exponential.InOut)
-		.start();
-
-		/*this.game.add.tween(this.g_giraffeGroup)
-		.to({ y: 0}, 1000, Phaser.Easing.Exponential.InOut)
-		.start();*/
+			.to({ y: this.game.canvas.height-250 }, 1000, Phaser.Easing.Exponential.InOut)
+			.start();
+		this.game.add.tween(this.g_scoreBoardGroup)
+			.to({ y: 30 }, 1000, Phaser.Easing.Exponential.InOut)
+			.start();
+	},
+	//Texts must be an array. Will loop through all of them at speed.
+	showTutorialText:function(texts,endCallBack,endCallBackScope){
+		this.g_TutText.setText(texts[0]);
+		this.g_TutText.y = -1000;
+		this.game.add.tween(this.g_TutText)
+			.to({ y: 300 }, 500, Phaser.Easing.Exponential.InOut,false)
+			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,1000)
+			.start()
+			.onComplete.add(function(){
+				texts.shift();
+				if(texts.length > 0){
+					this.showTutorialText(texts,endCallBack,endCallBackScope);
+				}else{
+					endCallBack.call(endCallBackScope);
+				}
+			}, this);
 	}
 };
