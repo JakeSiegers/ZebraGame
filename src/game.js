@@ -198,7 +198,7 @@ GameStateObj.Game.prototype = {
 	damage:function(enemy,head){
 		this.game.stage.backgroundColor = '#992d2d';
 		console.log("damage!");
-		enemy.destory();
+		enemy.destroy();
 		this.g_started = false;
 	},
 	startPosition:function(){
