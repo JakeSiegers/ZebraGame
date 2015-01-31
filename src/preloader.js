@@ -10,7 +10,7 @@ GameStateObj.Preloader.prototype = {
 	},
 	preload: function() {
 
-		this.game.stage.backgroundColor = '#000000';
+		this.stage.backgroundColor = '#000000';
 
 		this.load.onFileComplete.add(this.updateLoadText,this);
 
@@ -44,9 +44,11 @@ GameStateObj.Preloader.prototype = {
 
 		this.load.image('scoreBoard', 'img/scoreBoard.png');
 
+		this.load.atlas('enemyBullet','img/enemies/bullet/bullet.png','img/enemies/bullet/bullet.json');
+
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 
-		//this.load.audio('bgm', ['music/Paradisco.ogg']);
+		this.load.audio('bgm', ['music/188854_Team_Rocket_Battle.ogg']);
 	},
 	create: function() {
 		//this.game.state.start('MainMenu');

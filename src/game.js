@@ -22,6 +22,9 @@ GameStateObj.Game.prototype = {
 		this.g_TutTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
 		this.g_ScoreTextStyle = { font: "20px Arial", fill: "#FFFFFF", align: "left" };
 
+		this.g_enemies = new Array();
+
+
 	},
 	create: function() {
 
@@ -39,7 +42,7 @@ GameStateObj.Game.prototype = {
 		//===========================================================================
 
 		this.game.touchControl = this.game.plugins.add(Phaser.Plugin.TouchControl);
-		this.game.touchControl.inputEnable();
+		
 		this.game.touchControl.settings.maxDistanceInPixels = 100;
 
 		this.game.touchControl.speed.x;
@@ -53,6 +56,8 @@ GameStateObj.Game.prototype = {
 
 		this.g_giraffeHead = this.add.sprite(this.g_headX, this.g_headY, 'giraffeHead');
 		this.g_giraffeHead.anchor.set(0.3,1);
+		this.game.physics.enable(this.g_giraffeHead,Phaser.Physics.ARCADE);
+		this.g_giraffeHead.body.velocity.x = 50 + Math.random() * 100;
 
 		this.g_giraffeNeckJoints = [];
 		this.g_giraffeNeckJoints.push(new Phaser.Point(this.g_headX, this.g_headY+160));
@@ -92,7 +97,7 @@ GameStateObj.Game.prototype = {
 		//this.g_scoreBoardGroup.add();
 		this.g_scoreBoardGroup.add(this.game.add.sprite(0,0,"scoreBoard"));
 		this.g_scoreBoardGroup.add(this.g_scoreText);
-		this.g_scoreBoardGroup.x = 30;
+		this.g_scoreBoardGroup.x = 1050;
 		this.g_scoreBoardGroup.y = -1000;
 		//===========================================================================
 		//Mini Tutorial
@@ -100,9 +105,10 @@ GameStateObj.Game.prototype = {
 
 		this.g_TutText = this.game.add.text(this.game.canvas.width/2,-1000,"[Default Text]", this.g_TutTextStyle);
 		this.g_TutText.anchor.set(0.5);
-		this.showTutorialText(["Welcome to the Serengeti!","Use the touch screen to control your head","Avoid hitting your head into anything!","Lets Begin!"],function(){
+		this.showTutorialText(["Welcome to the Serengeti!","Use the touch screen to control your head","Avoid hitting your head into anything!","The game gets faster as you play","Lets Begin!"],function(){
 			this.startPosition();
 			this.g_started = true;
+			this.game.touchControl.inputEnable();
 		},this);
 
 		
@@ -115,7 +121,9 @@ GameStateObj.Game.prototype = {
 			this.g_count = 0;
 		}
 
+		this.updateEnemies();
 		this.increaseGameSpeed();
+
 
 		this.g_groundGroup.forEach(function(i){
 			var num = this.g_groundGroup.getIndex(i)+1;
@@ -131,10 +139,12 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
 		this.g_giraffeNeckJoints[1].x = this.g_giraffeHead.x;
 
-		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*500;
-		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*500;
+		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*400;
+		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*-400;
 
 		this.g_scoreText.setText("Speed = "+(Math.round(this.g_gameSpeed * 100) / 100)+"(x"+this.g_gameSpeedMulti+")\nScore = "+this.g_score);
+
+		
 	},
 	render:function(){
 		var zx = this.g_giraffeHead.world.x;
@@ -146,14 +156,50 @@ GameStateObj.Game.prototype = {
 		//this.game.debug.geom(new Phaser.Rectangle(zx-zw/2,zy-zh/2,zw,zh), 'rgba(255,0,0,0.3)' ) ;
 	},
 	increaseGameSpeed:function(){
-		this.g_totalTraveled += this.g_gameSpeed;
-		this.g_score = Math.round(this.g_totalTraveled);
 		if(this.g_started == false){
 			return;
 		}
+
+		var scoreLastFrame = this.g_score;
+		this.g_totalTraveled += this.g_gameSpeed;
+		this.g_score = Math.round(this.g_totalTraveled/10);
+		if(this.g_score!=scoreLastFrame){
+			if(this.g_score %5 == 0 || this.g_score == 2){
+				this.spawnEnemy();
+			}
+		}
+
+		
 		if(this.g_gameSpeed<5){
 			this.g_gameSpeed += 0.0001*this.g_gameSpeedMulti;
 		}
+	},
+	spawnEnemy:function(){
+		var e = this.game.add.sprite(this.game.world.width, Math.random()*this.game.world.height, 'enemyBullet');
+    	e.animations.add('run');
+    	this.game.physics.arcade.enable(e);
+		this.g_enemies.push(e);
+	},
+	updateEnemies:function(){
+		for(i in this.g_enemies){
+			this.game.physics.arcade.collide( this.g_enemies[i], this.g_giraffeHead, this.damage, this.damage, this);
+			this.g_enemies[i].x -= 15*this.g_gameSpeed;
+			if(this.g_enemies[i].y>this.g_giraffeHead.world.y-20){
+				this.g_enemies[i].y-=0.5*this.g_gameSpeed;
+			}
+			if(this.g_enemies[i].y<this.g_giraffeHead.world.y-20){
+				this.g_enemies[i].y+=0.5*this.g_gameSpeed;
+			}
+			if(this.g_enemies[i].x<-100){
+				this.g_enemies[i].destroy();
+			}
+		}
+	},
+	damage:function(enemy,head){
+		this.game.stage.backgroundColor = '#992d2d';
+		console.log("damage!");
+		enemy.destory();
+		this.g_started = false;
 	},
 	startPosition:function(){
 		this.game.add.tween(this.g_groundGroup)
@@ -169,7 +215,7 @@ GameStateObj.Game.prototype = {
 		this.g_TutText.y = -1000;
 		this.game.add.tween(this.g_TutText)
 			.to({ y: 300 }, 500, Phaser.Easing.Exponential.InOut,false)
-			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,1000)
+			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,50)
 			.start()
 			.onComplete.add(function(){
 				texts.shift();

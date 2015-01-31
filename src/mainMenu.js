@@ -49,7 +49,8 @@ GameStateObj.MainMenu.prototype = {
 
 		this.mm_startBtn = this.game.add.button(this.game.canvas.width*0.25, -1000, 'button', function() {
 			//this.mm_ground.y = 100;
-
+			music = this.game.add.audio('bgm',1,true);
+   			music.play('',0,1,true);
 			this.hidePosition();
 			setTimeout(function(){
 				transitions.to('Game');
