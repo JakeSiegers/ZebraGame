@@ -61,6 +61,20 @@ GameStateObj.MainMenu.prototype = {
 		this.mm_startBtn.addChild(btnText);
 		this.mm_startBtn.anchor.set(0.5);
 
+		this.mm_startBtnX10 = this.game.add.button(this.game.canvas.width*0.25, -1000, 'button', function() {
+			//this.mm_ground.y = 100;
+			music = this.game.add.audio('bgm',1,true);
+   			music.play('',0,1,true);
+			this.hidePosition();
+			setTimeout(function(){
+				transitions.to('Game',null,true);
+			},1000);
+		}, this, 2, 1, 0);
+		var btnText = new Phaser.Text(this.game, 0, 0, "START (Debug)", this.mm_ButtonTextStyle)
+		btnText.anchor.set(0.5);
+		this.mm_startBtnX10.addChild(btnText);
+		this.mm_startBtnX10.anchor.set(0.5);
+
 		this.mm_helpBtn = this.game.add.button(this.game.canvas.width*0.50, -1000, 'button', function() {
 			this.helpPosition();
 		}, this, 2, 1, 0);
@@ -116,6 +130,7 @@ GameStateObj.MainMenu.prototype = {
 		this.game.add.tween(this.mm_ground).to({ y: this.game.canvas.height}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_Title).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_startBtnX10).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_helpBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_creditsBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 	},
@@ -127,6 +142,7 @@ GameStateObj.MainMenu.prototype = {
 
 		this.game.add.tween(this.mm_Title).to({ y: this.game.canvas.height/2 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtn).to({ y: this.game.canvas.height*0.75 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_startBtnX10).to({ y: this.game.canvas.height*0.90 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_helpBtn).to({ y: this.game.canvas.height*0.75 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_creditsBtn).to({ y: this.game.canvas.height*0.75 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 
@@ -143,6 +159,7 @@ GameStateObj.MainMenu.prototype = {
 
 		this.game.add.tween(this.mm_Title).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_startBtnX10).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_helpBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_creditsBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 
@@ -158,6 +175,7 @@ GameStateObj.MainMenu.prototype = {
 
 		this.game.add.tween(this.mm_Title).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_startBtnX10).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_helpBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_creditsBtn).to({ y: -1000 ,alpha:0}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 

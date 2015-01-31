@@ -1,6 +1,6 @@
 GameStateObj.Game = function(game) {};
 GameStateObj.Game.prototype = {
-	init: function(indata){
+	init: function(debugMode){
 
 		this.g_groundGroup;
 
@@ -10,7 +10,9 @@ GameStateObj.Game.prototype = {
 		this.g_headY = -160; //Relative to ground!
 
 		this.g_gameSpeed = 0; //max 1
-		this.g_gameSpeedMulti = 10;
+		this.g_gameSpeedMulti = 1;
+
+		this.g_tutTextSpeed = 1000;
 
 		this.g_count = 0;
 
@@ -24,7 +26,10 @@ GameStateObj.Game.prototype = {
 
 		this.g_enemies = new Array();
 
-
+		if(debugMode == true){
+			this.g_gameSpeedMulti = 10;
+			this.g_tutTextSpeed = 0;
+		}
 	},
 	create: function() {
 
@@ -215,7 +220,7 @@ GameStateObj.Game.prototype = {
 		this.g_TutText.y = -1000;
 		this.game.add.tween(this.g_TutText)
 			.to({ y: 300 }, 500, Phaser.Easing.Exponential.InOut,false)
-			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,50)
+			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,this.g_tutTextSpeed)
 			.start()
 			.onComplete.add(function(){
 				texts.shift();
