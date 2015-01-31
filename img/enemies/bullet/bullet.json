@@ -2,27 +2,59 @@
 
 {
 	"filename": "bulletbill1.png",
-	"frame": {"x":104,"y":2,"w":100,"h":68},
+	"frame": {"x":2,"y":2,"w":100,"h":84},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":68},
-	"sourceSize": {"w":100,"h":68}
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":84},
+	"sourceSize": {"w":100,"h":84}
 },
 {
 	"filename": "bulletbill2.png",
-	"frame": {"x":2,"y":2,"w":100,"h":76},
+	"frame": {"x":104,"y":2,"w":100,"h":92},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":76},
-	"sourceSize": {"w":100,"h":76}
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":92},
+	"sourceSize": {"w":100,"h":92}
+},
+{
+	"filename": "bulletbill3.png",
+	"frame": {"x":206,"y":2,"w":100,"h":104},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":104},
+	"sourceSize": {"w":100,"h":104}
+},
+{
+	"filename": "bulletbill4.png",
+	"frame": {"x":308,"y":2,"w":100,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":108},
+	"sourceSize": {"w":100,"h":108}
+},
+{
+	"filename": "bulletbill5.png",
+	"frame": {"x":410,"y":2,"w":100,"h":104},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":104},
+	"sourceSize": {"w":100,"h":104}
+},
+{
+	"filename": "bulletbill6.png",
+	"frame": {"x":512,"y":2,"w":100,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":92},
+	"sourceSize": {"w":100,"h":92}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "bullet.png",
 	"format": "RGBA8888",
-	"size": {"w":206,"h":80},
+	"size": {"w":614,"h":112},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:72136bb9c07160dface465ee1dcbfec8:71b7f3f8a8df2d4032caa00455cb49d6:ce0aeb6b1dd09bd42d31ec6c01e81ef2$"
+	"smartupdate": "$TexturePacker:SmartUpdate:afab0253930996d83c696770555c5e85:9eaadd4d957eb7f78a4ed143e7e886dc:ce0aeb6b1dd09bd42d31ec6c01e81ef2$"
 }
 }

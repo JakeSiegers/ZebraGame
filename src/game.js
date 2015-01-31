@@ -180,8 +180,16 @@ GameStateObj.Game.prototype = {
 		}
 	},
 	spawnEnemy:function(){
-		var e = this.game.add.sprite(this.game.world.width, Math.random()*this.game.world.height, 'enemyBullet');
-    	e.animations.add('run');
+		var e = this.game.add.sprite(this.game.world.width, Math.random()*this.game.world.height, 'enemyBullet','bulletbill1.png');
+		e.animations.add('main', [
+			'bulletbill1.png',
+			'bulletbill2.png',
+			'bulletbill3.png',
+			'bulletbill4.png',
+			'bulletbill5.png',
+			'bulletbill6.png',
+		], 10, true, false);
+    	e.animations.play('main');
     	this.game.physics.arcade.enable(e);
 		this.g_enemies.push(e);
 	},
