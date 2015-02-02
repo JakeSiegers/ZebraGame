@@ -23,6 +23,7 @@ GameStateObj.Game.prototype = {
 
 		this.g_TutTextStyle = { font: "65px Arial", fill: "#000000", align: "center" };
 		this.g_ScoreTextStyle = { font: "20px Arial", fill: "#FFFFFF", align: "left" };
+		this.g_ButtonTextStyle = { font: "30px Arial", fill: "#FFFFFF", align: "center" };
 
 		this.g_enemies = new Array();
 
@@ -116,7 +117,19 @@ GameStateObj.Game.prototype = {
 			this.game.touchControl.inputEnable();
 		},this);
 
-		
+		//===========================================================================
+		//Back Button
+		//===========================================================================
+		this.g_backBtn = this.game.add.button(200, -1000, 'button', function() {
+			this.hidePosition();
+			setTimeout(function(){
+				transitions.to('MainMenu',null,true);
+			},1000);
+		}, this, 2, 1, 0);
+		var btnText = new Phaser.Text(this.game, 0, 0, "Main Menu", this.g_ButtonTextStyle)
+		btnText.anchor.set(0.5);
+		this.g_backBtn.addChild(btnText);
+		this.g_backBtn.anchor.set(0.5);
 
 	},
 	update:function(){
@@ -213,6 +226,8 @@ GameStateObj.Game.prototype = {
 		console.log("damage!");
 		enemy.destroy();
 		this.g_started = false;
+		this.game.add.tween(this.g_backBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.touchControl.inputDisable();
 	},
 	startPosition:function(){
 		this.game.add.tween(this.g_groundGroup)
@@ -220,6 +235,14 @@ GameStateObj.Game.prototype = {
 			.start();
 		this.game.add.tween(this.g_scoreBoardGroup)
 			.to({ y: 30 }, 1000, Phaser.Easing.Exponential.InOut)
+			.start();
+	},
+	hidePosition:function(){
+		this.game.add.tween(this.g_groundGroup)
+			.to({ y: -1000}, 1000, Phaser.Easing.Exponential.InOut)
+			.start();
+		this.game.add.tween(this.g_scoreBoardGroup)
+			.to({ y: -1000 }, 1000, Phaser.Easing.Exponential.InOut)
 			.start();
 	},
 	//Texts must be an array. Will loop through all of them at speed.

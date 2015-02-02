@@ -48,7 +48,7 @@ GameStateObj.Preloader.prototype = {
 
 		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
 
-		this.load.audio('bgm', ['music/188854_Team_Rocket_Battle.ogg']);
+		//this.load.audio('bgm', ['music/188854_Team_Rocket_Battle.ogg']);
 	},
 	create: function() {
 		//this.game.state.start('MainMenu');
