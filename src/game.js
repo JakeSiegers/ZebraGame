@@ -239,11 +239,12 @@ GameStateObj.Game.prototype = {
 	},
 	hidePosition:function(){
 		this.game.add.tween(this.g_groundGroup)
-			.to({ y: -1000}, 1000, Phaser.Easing.Exponential.InOut)
+			.to({ y: 1000}, 1000, Phaser.Easing.Exponential.InOut)
 			.start();
 		this.game.add.tween(this.g_scoreBoardGroup)
-			.to({ y: -1000 }, 1000, Phaser.Easing.Exponential.InOut)
+			.to({ y: 1000 }, 1000, Phaser.Easing.Exponential.InOut)
 			.start();
+		this.game.add.tween(this.g_backBtn).to({ y: 1000}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 	},
 	//Texts must be an array. Will loop through all of them at speed.
 	showTutorialText:function(texts,endCallBack,endCallBackScope){

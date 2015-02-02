@@ -47,7 +47,7 @@
 		this.imageGroup.push(this.game.add.sprite(0, 0, 'touch_segment'));
 		this.imageGroup.push(this.game.add.sprite(0, 0, 'touch_segment'));
 		this.imageGroup.push(this.game.add.sprite(0, 0, 'touch'));
-		
+
 		this.imageGroup.forEach(function (e) {
 			e.anchor.set(0.5);
 			e.visible=false;
@@ -81,6 +81,7 @@
 	};
 
 	Phaser.Plugin.TouchControl.prototype.inputDisable = function() {
+		removeCompass.call(this);
 		this.input.onDown.remove(createCompass, this);
 		this.input.onUp.remove(removeCompass, this);
 	};
