@@ -4,5 +4,6 @@
 	game.state.add('Preloader', GameStateObj.Preloader);
 	game.state.add('MainMenu', GameStateObj.MainMenu);
 	game.state.add('Game', GameStateObj.Game);
+	game.state.add('LevelSelect', GameStateObj.LevelSelect);
 	game.state.start('Boot');
 })();

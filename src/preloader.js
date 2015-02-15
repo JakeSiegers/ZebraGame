@@ -35,6 +35,7 @@ GameStateObj.Preloader.prototype = {
 		this.load.image('touch', 'img/joystickPointer.png');
 
 		this.load.spritesheet('button', 'img/buttons.png', 285, 74);
+		this.load.spritesheet('squareButton', 'img/SquareButtons.png', 74, 74);
 
 		this.load.image('giraffeHead', 'img/giraffeHead.png');
 		this.load.image('giraffeNeck', 'img/giraffeNeck.png');

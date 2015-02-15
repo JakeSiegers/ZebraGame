@@ -88,11 +88,11 @@ GameStateObj.Game.prototype = {
 		this.g_groundGroup.add(this.game.add.tileSprite(0,0, this.game.canvas.width, this.game.cache.getImage('hills').height, 'hills'));
 		this.g_groundGroup.add(this.game.add.tileSprite(0,10, this.game.canvas.width, this.game.cache.getImage('grass1').height, 'grass1'));
 		this.g_groundGroup.add(this.g_giraffeGroup);
-		this.g_groundGroup.add(this.game.add.tileSprite(0,140, this.game.canvas.width, this.game.cache.getImage('ground').height*5, 'ground'));
+		this.g_groundGroup.add(this.game.add.tileSprite(0,140, this.game.canvas.width, this.game.cache.getImage('ground').height*2, 'ground'));
 		this.g_groundGroup.add(this.game.add.tileSprite(0,40, this.game.canvas.width, this.game.cache.getImage('grass2').height, 'grass2'));
 
 		this.g_groundGroup.y=1000;
-		
+
 
 		//===========================================================================
 		//ScoreBoard
@@ -162,7 +162,6 @@ GameStateObj.Game.prototype = {
 
 		this.g_scoreText.setText("Speed = "+(Math.round(this.g_gameSpeed * 100) / 100)+"(x"+this.g_gameSpeedMulti+")\nScore = "+this.g_score);
 
-		
 	},
 	render:function(){
 		var zx = this.g_giraffeHead.world.x;
@@ -187,7 +186,6 @@ GameStateObj.Game.prototype = {
 			}
 		}
 
-		
 		if(this.g_gameSpeed<5){
 			this.g_gameSpeed += 0.0001*this.g_gameSpeedMulti;
 		}

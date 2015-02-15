@@ -9,7 +9,7 @@ GameStateObj.Boot.prototype = {
 	},
 	create: function() {
 		//this.game.input.maxPointers = 1;
-		this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;//SHOW_ALL;
+		this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;//EXACT_FIT
 		this.game.scale.pageAlignHorizontally = true;
 		this.game.scale.pageAlignVertically = true;
 		//this.game.scale.setScreenSize(true);

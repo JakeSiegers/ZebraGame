@@ -53,7 +53,7 @@ GameStateObj.MainMenu.prototype = {
    			music.play('',0,1,true);
 			this.hidePosition();
 			setTimeout(function(){
-				transitions.to('Game');
+				transitions.to('LevelSelect');
 			},1000);
 		}, this, 2, 1, 0);
 		var btnText = new Phaser.Text(this.game, 0, 0, "START", this.mm_ButtonTextStyle)
@@ -67,7 +67,7 @@ GameStateObj.MainMenu.prototype = {
    			//music.play('',0,1,true);
 			this.hidePosition();
 			setTimeout(function(){
-				transitions.to('Game',null,true);
+				transitions.to('LevelSelect',null,true);
 			},1000);
 		}, this, 2, 1, 0);
 		var btnText = new Phaser.Text(this.game, 0, 0, "START (Debug)", this.mm_ButtonTextStyle)
