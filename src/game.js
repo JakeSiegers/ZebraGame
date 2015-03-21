@@ -63,17 +63,17 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeHead = this.add.sprite(this.g_headX, this.g_headY, 'giraffeHead');
 		this.g_giraffeHead.anchor.set(0.3,1);
 		this.game.physics.enable(this.g_giraffeHead,Phaser.Physics.ARCADE);
-		this.g_giraffeHead.body.velocity.x = 50 + Math.random() * 100;
+		//this.g_giraffeHead.body.velocity.x = 50 + Math.random() * 100;
 
 		this.g_giraffeNeckJoints = [];
 		this.g_giraffeNeckJoints.push(new Phaser.Point(this.g_headX, this.g_headY+160));
 		this.g_giraffeNeckJoints.push(new Phaser.Point(0, 0));
 
 		this.g_giraffeNeck = this.game.add.rope(0,0,'giraffeNeck', null, this.g_giraffeNeckJoints);
+		this.g_giraffeNeckJoints[1].x = this.g_giraffeHead.x;
 
 		this.g_giraffeBody = this.add.sprite(this.g_headX, this.g_headY+150, 'giraffeBody');
 		this.g_giraffeBody.anchor.set(0.715,0);
-
 
 		this.g_giraffeGroup.add(this.g_giraffeHead);
 		this.g_giraffeGroup.add(this.g_giraffeNeck);
@@ -114,7 +114,7 @@ GameStateObj.Game.prototype = {
 		this.showTutorialText(["Welcome to the Serengeti!","Use the touch screen to control your head","Avoid hitting your head into anything!","The game gets faster as you play","Lets Begin!"],function(){
 			this.startPosition();
 			this.g_started = true;
-			this.game.touchControl.inputEnable();
+			//this.game.touchControl.inputEnable();
 		},this);
 
 		//===========================================================================
@@ -134,6 +134,8 @@ GameStateObj.Game.prototype = {
 	},
 	update:function(){
 
+		
+
 		this.g_count += this.g_gameSpeed/1000;
 		if(this.g_count>Math.PI*2){
 			this.g_count = 0;
@@ -141,7 +143,7 @@ GameStateObj.Game.prototype = {
 
 		this.updateEnemies();
 		this.increaseGameSpeed();
-
+		this.updateGiraffePosition();
 
 		this.g_groundGroup.forEach(function(i){
 			var num = this.g_groundGroup.getIndex(i)+1;
@@ -150,12 +152,7 @@ GameStateObj.Game.prototype = {
 			i.tilePosition.x -= this.g_gameSpeed*10*multi;
 		},this);
 
-		this.g_giraffeHead.x = this.g_headX - this.game.touchControl.speed.x*2;
-		this.g_giraffeHead.y = this.g_headY - this.game.touchControl.speed.y*2;
-
-
-		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
-		this.g_giraffeNeckJoints[1].x = this.g_giraffeHead.x;
+		
 
 		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*400;
 		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*-400;
@@ -164,13 +161,30 @@ GameStateObj.Game.prototype = {
 
 	},
 	render:function(){
-		var zx = this.g_giraffeHead.world.x;
-		var zy = this.g_giraffeHead.world.y;
-		var zw = this.g_giraffeHead.width;
-		var zh = this.g_giraffeHead.height;
 
-		//this.game.debug.text("X: "+zx+" Y:"+zy, 32, 32);
-		//this.game.debug.geom(new Phaser.Rectangle(zx-zw/2,zy-zh/2,zw,zh), 'rgba(255,0,0,0.3)' ) ;
+		//this.game.debug.body(this.g_giraffeHead, 'rgba(255,0,0,0.3)');
+
+		//this.game.debug.geom(new Phaser.Rectangle(this.game.input.worldX-5,this.game.input.worldY-5,10,10), 'rgb(0,0,255)' ) ;
+	},
+	updateGiraffePosition:function(){
+		if(this.g_started == false){
+			return;
+		}
+		//We cannot move this with the group, so we must do it seperately.
+		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,this.game.input.worldY-this.g_giraffeHead.height/2);
+		//Keeps the neck on, becuse groups do that
+		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,this.game.input.worldX-this.g_giraffeGroup.width);
+		//Keep neck attached!
+		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
+		
+	},
+	smoothMove:function(from,to){
+		var temp;
+		if(from<to)
+		temp=(from+(0.1*Math.abs(from-to)));
+		else
+		temp=(from-(0.1*Math.abs(from-to)));
+		return Math.ceil(temp);
 	},
 	increaseGameSpeed:function(){
 		if(this.g_started == false){
@@ -225,6 +239,7 @@ GameStateObj.Game.prototype = {
 		enemy.destroy();
 		this.g_started = false;
 		this.game.add.tween(this.g_backBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.g_giraffeGroup).to({x:this.g_giraffeGroup.x-100,alpha:0}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.touchControl.inputDisable();
 	},
 	startPosition:function(){
@@ -249,8 +264,8 @@ GameStateObj.Game.prototype = {
 		this.g_TutText.setText(texts[0]);
 		this.g_TutText.y = -1000;
 		this.game.add.tween(this.g_TutText)
-			.to({ y: 300 }, 500, Phaser.Easing.Exponential.InOut,false)
-			.to({ y: 1000 }, 500, Phaser.Easing.Exponential.InOut,false,this.g_tutTextSpeed)
+			.to({ y: 300 }, 100, Phaser.Easing.Exponential.InOut,false)
+			.to({ y: 1000 }, 100, Phaser.Easing.Exponential.InOut,false,this.g_tutTextSpeed)
 			.start()
 			.onComplete.add(function(){
 				texts.shift();

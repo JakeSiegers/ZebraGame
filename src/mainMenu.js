@@ -102,8 +102,11 @@ GameStateObj.MainMenu.prototype = {
 		this.mm_credits = this.game.add.sprite(0,this.game.canvas.height,'creditsScreen');
 		this.mm_how2play = this.game.add.sprite(0,this.game.canvas.height,'how2playScreen');
 
-		this.mm_Title = this.game.add.text(this.game.canvas.width/2,-1000, "Serengeti Sprint", this.mm_TitleStyle);
-		this.mm_Title.anchor.set(0.5);
+		this.mm_Title = this.game.add.bitmapText(this.game.canvas.width/2,-1000, "mainFont", "Serengeti Sprint", 100);
+		this.mm_Title.x = this.game.canvas.width/2 - (this.mm_Title.textWidth * 0.5);
+		//this.mm_Title = this.game.add.text(this.game.canvas.width/2,-1000, "Serengeti Sprint", this.mm_TitleStyle);
+		//this.mm_Title.anchor.set(0.5);
+		console.log(this.mm_Title);
 
 		this.startPosition();
 	},
@@ -140,7 +143,7 @@ GameStateObj.MainMenu.prototype = {
 		.to({ y: this.game.canvas.height-350 }, 1000, Phaser.Easing.Exponential.InOut)
 		.start();
 
-		this.game.add.tween(this.mm_Title).to({ y: this.game.canvas.height/2 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.mm_Title).to({ y: this.game.canvas.height*0.33 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtn).to({ y: this.game.canvas.height*0.75 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_startBtnX10).to({ y: this.game.canvas.height*0.90 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.mm_helpBtn).to({ y: this.game.canvas.height*0.75 ,alpha:1}, 1000, Phaser.Easing.Exponential.InOut, true, 0, 0);

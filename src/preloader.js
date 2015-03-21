@@ -21,35 +21,37 @@ GameStateObj.Preloader.prototype = {
 		//this.preloadBar = this.add.sprite((320-158)/2, (480-50)/2, 'preloaderBar');
 		//this.load.setPreloadSprite(this.preloadBar);
 
-		this.load.image('hills', 'img/hills.png');
-		this.load.image('tree', 'img/tree.png');
-		this.load.image('grass1', 'img/grass1.png');
-		this.load.image('grass2', 'img/grass2.png');
-		this.load.image('ground', 'img/ground.png');
+		this.load.image('hills', 'assets/img/hills.png');
+		this.load.image('tree', 'assets/img/tree.png');
+		this.load.image('grass1', 'assets/img/grass1.png');
+		this.load.image('grass2', 'assets/img/grass2.png');
+		this.load.image('ground', 'assets/img/ground.png');
 
-		this.load.image('creditsScreen', 'img/credits.png');
-		this.load.image('how2playScreen', 'img/how2play.png');
+		this.load.image('creditsScreen', 'assets/img/credits.png');
+		this.load.image('how2playScreen', 'assets/img/how2play.png');
 
-		this.load.image('compass', 'img/joystickBack.png');
-		this.load.image('touch_segment', 'img/joystickFront.png');
-		this.load.image('touch', 'img/joystickPointer.png');
+		this.load.image('compass', 'assets/img/joystickBack.png');
+		this.load.image('touch_segment', 'assets/img/joystickFront.png');
+		this.load.image('touch', 'assets/img/joystickPointer.png');
 
-		this.load.spritesheet('button', 'img/buttons.png', 285, 74);
-		this.load.spritesheet('squareButton', 'img/SquareButtons.png', 74, 74);
+		this.load.spritesheet('button', 'assets/img/buttons.png', 285, 74);
+		this.load.spritesheet('squareButton', 'assets/img/SquareButtons.png', 74, 74);
 
-		this.load.image('giraffeHead', 'img/giraffeHead.png');
-		this.load.image('giraffeNeck', 'img/giraffeNeck.png');
-		this.load.image('giraffeBody', 'img/giraffeBody.png');
+		this.load.image('giraffeHead', 'assets/img/giraffeHead.png');
+		this.load.image('giraffeNeck', 'assets/img/giraffeNeck.png');
+		this.load.image('giraffeBody', 'assets/img/giraffeBody.png');
 
-		this.load.image('sun', 'img/sun.png');
+		this.load.image('sun', 'assets/img/sun.png');
 
-		this.load.image('scoreBoard', 'img/scoreBoard.png');
+		this.load.image('scoreBoard', 'assets/img/scoreBoard.png');
 
-		this.load.atlas('enemyBullet','img/enemies/bullet/bullet.png','img/enemies/bullet/bullet.json');
+		this.load.atlas('enemyBullet','assets/img/enemies/bullet/bullet.png','assets/img/enemies/bullet/bullet.json');
 
-		//this.load.spritesheet('button-audio', 'img/button-audio.png', 35, 35);
+		this.load.bitmapFont("mainFont", "assets/fonts/font.png", "assets/fonts/font.fnt");
 
-		//this.load.audio('bgm', ['music/188854_Team_Rocket_Battle.ogg']);
+		//this.load.spritesheet('button-audio', 'assets/img/button-audio.png', 35, 35);
+
+		//this.load.audio('bgm', ['assets/music/188854_Team_Rocket_Battle.ogg']);
 	},
 	create: function() {
 		//this.game.state.start('MainMenu');
