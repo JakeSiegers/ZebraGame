@@ -194,8 +194,8 @@ GameStateObj.Game.prototype = {
 			return;
 		}
 
-		var newX;
-		var newY;
+		var newX = 200;
+		var newY = 300;
 
 		//if(this.game.input.pointer1.active){
 		//		this.weAreUsingTouch = true;
@@ -239,11 +239,11 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
 
 
-		if(this.game.input.pointer2.active){
+		/*if(this.game.input.pointer2.active){
 			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,-300);
 		}else{
 			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,0);
-		}
+		}*/
 	},
 	giraffeJump:function(){
 		if(this.g_giraffeJumping == false){
