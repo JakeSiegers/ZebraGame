@@ -162,7 +162,7 @@ GameStateObj.Game.prototype = {
 		}
 
 		this.updateEnemies();
-		//this.increaseGameSpeed();
+		this.increaseGameSpeed();
 		this.updateGiraffePosition();
 
 		this.g_groundGroup.forEach(function(i){
