@@ -311,7 +311,7 @@ GameStateObj.Game.prototype = {
 		}
 	},
 	damage:function(enemy,head){
-		this.game.stage.backgroundColor = '#992d2d';
+		/*this.game.stage.backgroundColor = '#992d2d';
 		console.log("damage!");
 		enemy.destroy();
 		this.g_started = false;
@@ -319,6 +319,7 @@ GameStateObj.Game.prototype = {
 		this.game.add.tween(this.g_menuBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.g_giraffeGroup).to({x:this.g_giraffeGroup.x-100,alpha:0}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.touchControl.inputDisable();
+		*/
 	},
 	startPosition:function(){
 		this.game.add.tween(this.g_groundGroup)
