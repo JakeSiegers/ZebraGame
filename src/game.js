@@ -118,18 +118,32 @@ GameStateObj.Game.prototype = {
 		},this);
 
 		//===========================================================================
-		//Back Button
+		//Retry Button
 		//===========================================================================
-		this.g_backBtn = this.game.add.button(200, -1000, 'button', function() {
+		this.g_retryBtn = this.game.add.button(200, -1000, 'button', function() {
 			this.hidePosition();
 			setTimeout(function(){
-				transitions.to('game',null,true);
+				transitions.to('Game',null,true);
 			},1000);
 		}, this, 2, 1, 0);
 		var btnText = new Phaser.Text(this.game, 0, 0, "Retry", this.g_ButtonTextStyle)
 		btnText.anchor.set(0.5);
-		this.g_backBtn.addChild(btnText);
-		this.g_backBtn.anchor.set(0.5);
+		this.g_retryBtn.addChild(btnText);
+		this.g_retryBtn.anchor.set(0.5);
+
+		//===========================================================================
+		//Main Menu Button
+		//===========================================================================
+		this.g_menuBtn = this.game.add.button(600, -1000, 'button', function() {
+			this.hidePosition();
+			setTimeout(function(){
+				transitions.to('MainMenu',null,true);
+			},1000);
+		}, this, 2, 1, 0);
+		var btnText = new Phaser.Text(this.game, 0, 0, "Main Menu", this.g_ButtonTextStyle)
+		btnText.anchor.set(0.5);
+		this.g_menuBtn.addChild(btnText);
+		this.g_menuBtn.anchor.set(0.5);
 
 	},
 	update:function(){
@@ -162,8 +176,8 @@ GameStateObj.Game.prototype = {
 	},
 	render:function(){
 
-		game.debug.pointer(game.input.pointer1);
-    	game.debug.pointer(game.input.pointer2);
+		this.game.debug.pointer(this.game.input.pointer1);
+    	this.game.debug.pointer(this.game.input.pointer2);
 
 		//this.game.debug.body(this.g_giraffeHead, 'rgba(255,0,0,0.3)');
 
@@ -173,10 +187,14 @@ GameStateObj.Game.prototype = {
 		if(this.g_started == false){
 			return;
 		}
+
+		var newX = this.game.input.pointer1.worldX;
+		var newY = this.game.input.pointer1.worldY;
+
 		//We cannot move this with the group, so we must do it seperately.
-		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,this.game.input.worldY-this.g_giraffeHead.height/2);
+		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,newY-this.g_giraffeHead.height/2);
 		//Keeps the neck on, becuse groups do that
-		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,this.game.input.worldX-this.g_giraffeGroup.width);
+		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,newX-this.g_giraffeGroup.width);
 		//Keep neck attached!
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
 		
@@ -241,7 +259,8 @@ GameStateObj.Game.prototype = {
 		console.log("damage!");
 		enemy.destroy();
 		this.g_started = false;
-		this.game.add.tween(this.g_backBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.g_retryBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.g_menuBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.g_giraffeGroup).to({x:this.g_giraffeGroup.x-100,alpha:0}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.touchControl.inputDisable();
 	},
@@ -260,7 +279,8 @@ GameStateObj.Game.prototype = {
 		this.game.add.tween(this.g_scoreBoardGroup)
 			.to({ y: 1000 }, 1000, Phaser.Easing.Exponential.InOut)
 			.start();
-		this.game.add.tween(this.g_backBtn).to({ y: 1000}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.g_retryBtn).to({ y: 1000}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
+		this.game.add.tween(this.g_menuBtn).to({ y: 1000}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 	},
 	//Texts must be an array. Will loop through all of them at speed.
 	showTutorialText:function(texts,endCallBack,endCallBackScope){
