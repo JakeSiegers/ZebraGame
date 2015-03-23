@@ -205,9 +205,21 @@ GameStateObj.Game.prototype = {
 
 
 		//if(this.weAreUsingTouch){
+			var pointer1Left = false;
+
 			this.newY += 10;
 			if(this.game.input.pointer1.active){
 				if(this.game.input.pointer1.worldX < this.game.canvas.width/2){
+					pointer1Left = true;
+					this.newY -= 20;
+				}else{
+					pointer1Left = false;
+					this.giraffeJump();
+				}
+			}
+
+			if(this.game.input.pointer2.active){
+				if(!pointer1Left && this.game.input.pointer2.worldX < this.game.canvas.width/2){
 					this.newY -= 20;
 				}else{
 					this.giraffeJump();
