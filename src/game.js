@@ -31,6 +31,8 @@ GameStateObj.Game.prototype = {
 			this.g_gameSpeedMulti = 10;
 			this.g_tutTextSpeed = 0;
 		}
+
+		this.weAreUsingTouch = false;
 	},
 	create: function() {
 
@@ -192,7 +194,12 @@ GameStateObj.Game.prototype = {
 
 		var newX;
 		var newY;
+
 		if(this.game.input.pointer1.active){
+			this.weAreUsingTouch = true;
+		}
+
+		if(this.weAreUsingTouch){
 			newX = this.game.input.pointer1.worldX;
 			newY = this.game.input.pointer1.worldY;
 		}else{
@@ -223,7 +230,7 @@ GameStateObj.Game.prototype = {
 
 
 		if(this.game.input.pointer2.active){
-			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,300);
+			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,-300);
 		}else{
 			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,0);
 		}
