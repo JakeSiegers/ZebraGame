@@ -35,7 +35,7 @@ GameStateObj.Game.prototype = {
 		this.weAreUsingTouch = false;
 
 		this.g_giraffeJumping = false;
-		this.newX = 300;
+		this.newX = 200;
 		this.newY = 300;
 	},
 	create: function() {
