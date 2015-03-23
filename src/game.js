@@ -162,6 +162,9 @@ GameStateObj.Game.prototype = {
 	},
 	render:function(){
 
+		game.debug.pointer(game.input.pointer1);
+    	game.debug.pointer(game.input.pointer2);
+
 		//this.game.debug.body(this.g_giraffeHead, 'rgba(255,0,0,0.3)');
 
 		//this.game.debug.geom(new Phaser.Rectangle(this.game.input.worldX-5,this.game.input.worldY-5,10,10), 'rgb(0,0,255)' ) ;
