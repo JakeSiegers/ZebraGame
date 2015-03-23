@@ -190,12 +190,15 @@ GameStateObj.Game.prototype = {
 		//this.game.debug.geom(new Phaser.Rectangle(this.game.input.worldX-5,this.game.input.worldY-5,10,10), 'rgb(0,0,255)' ) ;
 	},
 	updateGiraffePosition:function(){
+		var newX = 300;
+		var newY;
+
 		if(this.g_started == false){
+			newY = 300;
 			return;
 		}
 
-		var newX = 300;
-		var newY = 300;
+		
 
 		//if(this.game.input.pointer1.active){
 		//		this.weAreUsingTouch = true;
@@ -203,10 +206,10 @@ GameStateObj.Game.prototype = {
 
 
 		//if(this.weAreUsingTouch){
-			newY -= 5;
+			newY += 10;
 			if(this.game.input.pointer1.active){
 				if(this.game.input.pointer1.worldX < this.game.canvas.width/2){
-					newY += 20;
+					newY -= 20;
 				}else{
 					this.giraffeJump();
 				}
