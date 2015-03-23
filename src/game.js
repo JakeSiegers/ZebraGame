@@ -244,7 +244,7 @@ GameStateObj.Game.prototype = {
 			this.newY = this.game.canvas.height-400;
 		}
 		if(this.newY<50){
-			this.newX = 50;
+			this.newY = 50;
 		}
 
 		//We cannot move this with the group, so we must do it seperately.
