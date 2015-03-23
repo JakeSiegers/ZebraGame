@@ -28,14 +28,14 @@ GameStateObj.Game.prototype = {
 		this.g_enemies = new Array();
 
 		if(debugMode == true){
-			this.g_gameSpeedMulti = 10;
+			this.g_gameSpeedMulti = 4;
 			this.g_tutTextSpeed = 0;
 		}
 
 		this.weAreUsingTouch = false;
 
 		this.g_giraffeJumping = false;
-		this.newX = 200;
+		this.newX = 100;
 		this.newY = 300;
 	},
 	create: function() {
@@ -327,7 +327,7 @@ GameStateObj.Game.prototype = {
 		}
 	},
 	damage:function(enemy,head){
-		/*this.game.stage.backgroundColor = '#992d2d';
+		this.game.stage.backgroundColor = '#992d2d';
 		console.log("damage!");
 		enemy.destroy();
 		this.g_started = false;
@@ -335,7 +335,6 @@ GameStateObj.Game.prototype = {
 		this.game.add.tween(this.g_menuBtn).to({ y: 100 ,alpha:1}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.add.tween(this.g_giraffeGroup).to({x:this.g_giraffeGroup.x-100,alpha:0}, 500, Phaser.Easing.Exponential.InOut, true, 0, 0);
 		this.game.touchControl.inputDisable();
-		*/
 	},
 	startPosition:function(){
 		this.game.add.tween(this.g_groundGroup)
