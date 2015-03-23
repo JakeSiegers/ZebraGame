@@ -226,8 +226,8 @@ GameStateObj.Game.prototype = {
 			this.newX = 0;
 		}
 
-		if(this.newY>this.game.canvas.height-300){
-			this.newY = this.game.canvas.height-300;
+		if(this.newY>this.game.canvas.height-400){
+			this.newY = this.game.canvas.height-400;
 		}
 		if(this.newY<50){
 			this.newX = 50;
@@ -236,7 +236,7 @@ GameStateObj.Game.prototype = {
 		//We cannot move this with the group, so we must do it seperately.
 		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,this.newY-this.g_giraffeHead.height/2);
 		//Keeps the neck on, becuse groups do that
-		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,this.newX-this.g_giraffeGroup.width);
+		this.g_giraffeGroup.x = this.newX;
 		//Keep neck attached!
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
 
