@@ -33,6 +33,8 @@ GameStateObj.Game.prototype = {
 		}
 
 		this.weAreUsingTouch = false;
+
+		this.g_giraffeJumping = false;
 	},
 	create: function() {
 
@@ -200,8 +202,16 @@ GameStateObj.Game.prototype = {
 		}
 
 		if(this.weAreUsingTouch){
-			newX = this.game.input.pointer1.worldX;
-			newY = this.game.input.pointer1.worldY;
+
+			if(this.game.input.pointer1.active){
+				if(this.game.input.pointer1.x < this.game.canvas.width/2){
+					newX = this.game.input.pointer1.worldX;
+					newY = this.game.input.pointer1.worldY;
+				}else{
+					this.giraffeJump();
+				}
+			}
+
 		}else{
 			newX = this.game.input.mousePointer.worldX;
 			newY = this.game.input.mousePointer.worldY;
@@ -233,6 +243,16 @@ GameStateObj.Game.prototype = {
 			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,-300);
 		}else{
 			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,0);
+		}
+	},
+	giraffeJump:function(){
+		if(this.g_giraffeJumping == false){
+			this.g_giraffeJumping =true;
+			this.game.add.tween(this.g_giraffeGroup)
+			.to({ y: 100 }, 500, Phaser.Easing.Exponential.InOut)
+			.to({ y: 0 }, 1000, Phaser.Easing.Exponential.InOut)
+			.onUpdateCallback(function(){this.g_giraffeJumping =false;},this)
+			.start();
 		}
 	},
 	smoothMove:function(from,to){
