@@ -35,6 +35,8 @@ GameStateObj.Game.prototype = {
 		this.weAreUsingTouch = false;
 
 		this.g_giraffeJumping = false;
+		this.newX = 300;
+		this.newY = 300;
 	},
 	create: function() {
 
@@ -190,11 +192,8 @@ GameStateObj.Game.prototype = {
 		//this.game.debug.geom(new Phaser.Rectangle(this.game.input.worldX-5,this.game.input.worldY-5,10,10), 'rgb(0,0,255)' ) ;
 	},
 	updateGiraffePosition:function(){
-		var newX = 300;
-		var newY;
 
 		if(this.g_started == false){
-			newY = 300;
 			return;
 		}
 
@@ -206,38 +205,38 @@ GameStateObj.Game.prototype = {
 
 
 		//if(this.weAreUsingTouch){
-			newY += 10;
+			this.newY += 10;
 			if(this.game.input.pointer1.active){
 				if(this.game.input.pointer1.worldX < this.game.canvas.width/2){
-					newY -= 20;
+					this.newY -= 20;
 				}else{
 					this.giraffeJump();
 				}
 			}
 
 		//}else{
-		//	newX = this.game.input.mousePointer.worldX;
-		//	newY = this.game.input.mousePointer.worldY;
+		//	this.newX = this.game.input.mousePointer.worldX;
+		//	this.newY = this.game.input.mousePointer.worldY;
 		//}
 
-		if(newX>this.game.canvas.width){
-			newX = this.game.canvas.width;
+		if(this.newX>this.game.canvas.width){
+			this.newX = this.game.canvas.width;
 		}
-		if(newX<0){
-			newX = 0;
+		if(this.newX<0){
+			this.newX = 0;
 		}
 
-		if(newY>this.game.canvas.height-300){
-			newY = this.game.canvas.height-300;
+		if(this.newY>this.game.canvas.height-300){
+			this.newY = this.game.canvas.height-300;
 		}
-		if(newY<50){
-			newX = 50;
+		if(this.newY<50){
+			this.newX = 50;
 		}
 
 		//We cannot move this with the group, so we must do it seperately.
-		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,newY-this.g_giraffeHead.height/2);
+		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,this.newY-this.g_giraffeHead.height/2);
 		//Keeps the neck on, becuse groups do that
-		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,newX-this.g_giraffeGroup.width);
+		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,this.newX-this.g_giraffeGroup.width);
 		//Keep neck attached!
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
 
