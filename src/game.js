@@ -234,7 +234,7 @@ GameStateObj.Game.prototype = {
 		}
 
 		//We cannot move this with the group, so we must do it seperately.
-		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,this.newY-this.g_giraffeHead.height/2);
+		this.g_giraffeHead.body.y = this.newY-this.g_giraffeHead.height/2;
 		//Keeps the neck on, becuse groups do that
 		this.g_giraffeGroup.x = this.newX;
 		//Keep neck attached!
