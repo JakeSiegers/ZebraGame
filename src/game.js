@@ -197,25 +197,25 @@ GameStateObj.Game.prototype = {
 		var newX;
 		var newY;
 
-		if(this.game.input.pointer1.active){
-			this.weAreUsingTouch = true;
-		}
+		//if(this.game.input.pointer1.active){
+		//		this.weAreUsingTouch = true;
+		//}
 
-		if(this.weAreUsingTouch){
 
+		//if(this.weAreUsingTouch){
+			newY -= 5;
 			if(this.game.input.pointer1.active){
-				if(this.game.input.pointer1.x < this.game.canvas.width/2){
-					newX = this.game.input.pointer1.worldX;
-					newY = this.game.input.pointer1.worldY;
+				if(this.game.input.pointer1.worldX < this.game.canvas.width/2){
+					newY += 10;
 				}else{
 					this.giraffeJump();
 				}
 			}
 
-		}else{
-			newX = this.game.input.mousePointer.worldX;
-			newY = this.game.input.mousePointer.worldY;
-		}
+		//}else{
+		//	newX = this.game.input.mousePointer.worldX;
+		//	newY = this.game.input.mousePointer.worldY;
+		//}
 
 		if(newX>this.game.canvas.width){
 			newX = this.game.canvas.width;
