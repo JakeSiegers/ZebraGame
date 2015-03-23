@@ -123,10 +123,10 @@ GameStateObj.Game.prototype = {
 		this.g_backBtn = this.game.add.button(200, -1000, 'button', function() {
 			this.hidePosition();
 			setTimeout(function(){
-				transitions.to('MainMenu',null,true);
+				transitions.to('game',null,true);
 			},1000);
 		}, this, 2, 1, 0);
-		var btnText = new Phaser.Text(this.game, 0, 0, "Main Menu", this.g_ButtonTextStyle)
+		var btnText = new Phaser.Text(this.game, 0, 0, "Retry", this.g_ButtonTextStyle)
 		btnText.anchor.set(0.5);
 		this.g_backBtn.addChild(btnText);
 		this.g_backBtn.anchor.set(0.5);
