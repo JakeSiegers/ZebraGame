@@ -194,7 +194,7 @@ GameStateObj.Game.prototype = {
 			return;
 		}
 
-		var newX = 200;
+		var newX = 300;
 		var newY = 300;
 
 		//if(this.game.input.pointer1.active){
@@ -206,7 +206,7 @@ GameStateObj.Game.prototype = {
 			newY -= 5;
 			if(this.game.input.pointer1.active){
 				if(this.game.input.pointer1.worldX < this.game.canvas.width/2){
-					newY += 10;
+					newY += 20;
 				}else{
 					this.giraffeJump();
 				}
@@ -247,9 +247,9 @@ GameStateObj.Game.prototype = {
 	},
 	giraffeJump:function(){
 		if(this.g_giraffeJumping == false){
-			this.g_giraffeJumping =true;
+			this.g_giraffeJumping = true;
 			this.game.add.tween(this.g_giraffeGroup)
-			.to({ y: 100 }, 500, Phaser.Easing.Exponential.InOut)
+			.to({ y: -100 }, 500, Phaser.Easing.Exponential.InOut)
 			.to({ y: 0 }, 1000, Phaser.Easing.Exponential.InOut)
 			.onUpdateCallback(function(){this.g_giraffeJumping =false;},this)
 			.start();
