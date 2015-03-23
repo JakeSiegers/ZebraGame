@@ -166,8 +166,6 @@ GameStateObj.Game.prototype = {
 			i.tilePosition.x -= this.g_gameSpeed*10*multi;
 		},this);
 
-		
-
 		this.g_sun.x = this.game.canvas.width/2 + Math.sin(this.g_count)*400;
 		this.g_sun.y = this.game.canvas.height/2 + Math.cos(this.g_count)*-400;
 
@@ -176,8 +174,12 @@ GameStateObj.Game.prototype = {
 	},
 	render:function(){
 
-		this.game.debug.pointer(this.game.input.pointer1);
-    	this.game.debug.pointer(this.game.input.pointer2);
+		if(this.game.input.pointer1.active){
+			this.game.debug.pointer(this.game.input.pointer1);
+		}
+		if(this.game.input.pointer2.active){
+    		this.game.debug.pointer(this.game.input.pointer2);
+    	}
 
 		//this.game.debug.body(this.g_giraffeHead, 'rgba(255,0,0,0.3)');
 
@@ -188,8 +190,29 @@ GameStateObj.Game.prototype = {
 			return;
 		}
 
-		var newX = this.game.input.pointer1.worldX;
-		var newY = this.game.input.pointer1.worldY;
+		var newX;
+		var newY;
+		if(this.game.input.pointer1.active){
+			newX = this.game.input.pointer1.worldX;
+			newY = this.game.input.pointer1.worldY;
+		}else{
+			newX = this.game.input.mousePointer.worldX;
+			newY = this.game.input.mousePointer.worldY;
+		}
+
+		if(newX>this.game.canvas.width){
+			newX = this.game.canvas.width;
+		}
+		if(newX<0){
+			newX = 0;
+		}
+
+		if(newY>this.game.canvas.height-300){
+			newY = this.game.canvas.height-300;
+		}
+		if(newY<50){
+			newX = 50;
+		}
 
 		//We cannot move this with the group, so we must do it seperately.
 		this.g_giraffeHead.body.y = this.smoothMove(this.g_giraffeHead.body.y,newY-this.g_giraffeHead.height/2);
@@ -197,7 +220,13 @@ GameStateObj.Game.prototype = {
 		this.g_giraffeGroup.x = this.smoothMove(this.g_giraffeGroup.x,newX-this.g_giraffeGroup.width);
 		//Keep neck attached!
 		this.g_giraffeNeckJoints[1].y = this.g_giraffeHead.y-10;
-		
+
+
+		if(this.game.input.pointer2.active){
+			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,300);
+		}else{
+			this.g_giraffeGroup.y = this.smoothMove(this.g_giraffeGroup.y,0);
+		}
 	},
 	smoothMove:function(from,to){
 		var temp;
